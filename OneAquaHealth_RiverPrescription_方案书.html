@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RiverPrescription · 河流处方 —— OneAquaHealth 决策层方案书</title>
+<style>
+:root{
+  --ink:#1b1b19; --ink2:#4a4a46; --ink3:#77776f; --ink4:#a3a39a;
+  --bg:#ffffff; --soft:#faf9f5; --soft2:#f3f1ea;
+  --line:#e3e1d8; --line2:#cfcdc2;
+  --blue-bg:#eaf1f9;  --blue-line:#cddff0;  --blue:#1a4f8a;  --blue-ink:#0c447c;
+  --teal-bg:#e6f2ee;  --teal-line:#c9e4da;  --teal:#0f6e56;  --teal-ink:#085041;
+  --amber-bg:#faf1e0; --amber-line:#eddcb8; --amber:#8a5a10; --amber-ink:#633806;
+  --red-bg:#fbecec;   --red-line:#f0d3d3;   --red:#a32d2d;   --red-ink:#791f1f;
+  --purple-bg:#eeedfb;--purple-line:#cfc6f2;--purple:#4b3f9e;--purple-ink:#3c3489;
+  --fs-11:11px; --fs-12:12px; --fs-13:13px; --fs-15:15px;
+  --fs-16:16px; --fs-18:18px; --fs-22:22px; --fs-30:30px;
+  --w-reg:400; --w-mid:500;
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:22px; --s-6:30px; --s-7:44px; --s-8:60px;
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px;
+  --font-serif:"Songti SC","Source Han Serif SC",Georgia,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --font-sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;
+  --font-mono:"SF Mono",Menlo,Consolas,monospace;
+  --dur-fast:140ms; --dur-mid:260ms; --dur-slow:480ms;
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+  --ease-in-out:cubic-bezier(.42,0,.58,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--font-sans); font-size:var(--fs-15); line-height:1.75;
+  font-weight:var(--w-reg);
+}
+.vs-wrap{max-width:1080px;margin:0 auto;padding:var(--s-8) var(--s-5) var(--s-8)}
+
+/* ---------- 版式基元 ---------- */
+h1,h2,h3,h4{font-family:var(--font-serif);font-weight:var(--w-mid);line-height:1.3;margin:0}
+h1{font-size:var(--fs-30);letter-spacing:-.01em}
+h2{font-size:var(--fs-22);margin:var(--s-8) 0 var(--s-4);padding-top:var(--s-5);border-top:1px solid var(--line)}
+h3{font-size:var(--fs-18);margin:var(--s-6) 0 var(--s-3)}
+h4{font-size:var(--fs-16);margin:var(--s-5) 0 var(--s-2)}
+p{margin:0 0 var(--s-3)}
+a{color:var(--blue-ink)}
+code{font-family:var(--font-mono);font-size:.88em;background:var(--soft2);padding:1px 5px;border-radius:4px;color:var(--ink)}
+strong{font-weight:var(--w-mid)}
+.mono{font-family:var(--font-mono);font-size:var(--fs-12)}
+.dim{color:var(--ink3)}
+.sm{font-size:var(--fs-12)}
+.xs{font-size:var(--fs-11)}
+
+.vs-kicker{font-family:var(--font-mono);font-size:var(--fs-11);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);font-weight:var(--w-mid)}
+.vs-lede{
+  font-family:var(--font-serif);font-size:var(--fs-18);line-height:1.7;color:var(--ink);
+  border-left:3px solid var(--teal);padding:var(--s-1) 0 var(--s-1) var(--s-4);
+  margin:var(--s-4) 0 var(--s-5);max-width:74ch
+}
+.vs-src{font-size:var(--fs-11);color:var(--ink4);margin-top:var(--s-2);line-height:1.6}
+.vs-divider{height:1px;background:var(--line);margin:var(--s-6) 0;border:0}
+.vs-quote{
+  font-family:var(--font-serif);font-size:var(--fs-16);color:var(--ink2);
+  background:var(--soft);border-radius:var(--r-md);padding:var(--s-4) var(--s-5);
+  border-left:3px solid var(--line2);margin:var(--s-4) 0
+}
+
+/* ---------- 卡片 ---------- */
+.vs-cards{display:grid;gap:var(--s-4);margin:var(--s-5) 0}
+.vs-cards-4{grid-template-columns:repeat(4,1fr)}
+.vs-cards-3{grid-template-columns:repeat(3,1fr)}
+.vs-cards-2{grid-template-columns:repeat(2,1fr)}
+.vs-card{
+  background:var(--bg);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:var(--s-4);min-width:0
+}
+.vs-card h4{margin:0 0 var(--s-2);font-size:var(--fs-15);font-family:var(--font-sans);font-weight:var(--w-mid)}
+.vs-card p{margin:0;font-size:var(--fs-13);color:var(--ink2);line-height:1.65}
+.vs-card-n{font-family:var(--font-mono);font-size:var(--fs-22);font-weight:var(--w-mid);display:block;margin-bottom:var(--s-1)}
+.vs-card-blue{border-top:3px solid var(--blue)}
+.vs-card-teal{border-top:3px solid var(--teal)}
+.vs-card-amber{border-top:3px solid var(--amber)}
+.vs-card-red{border-top:3px solid var(--red)}
+.vs-card-blue .vs-card-n{color:var(--blue-ink)}
+.vs-card-teal .vs-card-n{color:var(--teal-ink)}
+.vs-card-amber .vs-card-n{color:var(--amber-ink)}
+.vs-card-red .vs-card-n{color:var(--red-ink)}
+
+/* ---------- Note ---------- */
+.vs-note{border-radius:var(--r-md);padding:var(--s-3) var(--s-4);margin:var(--s-4) 0;font-size:var(--fs-13);line-height:1.7;border:1px solid}
+.vs-note-blue{background:var(--blue-bg);border-color:var(--blue-line);color:var(--blue-ink)}
+.vs-note-teal{background:var(--teal-bg);border-color:var(--teal-line);color:var(--teal-ink)}
+.vs-note-amber{background:var(--amber-bg);border-color:var(--amber-line);color:var(--amber-ink)}
+.vs-note-red{background:var(--red-bg);border-color:var(--red-line);color:var(--red-ink)}
+.vs-note strong{font-weight:var(--w-mid)}
+
+.vs-banner{border-radius:var(--r-md);padding:var(--s-4) var(--s-5);margin:var(--s-5) 0;border:1px solid;font-size:var(--fs-15)}
+.vs-banner-red{background:var(--red-bg);border-color:var(--red-line);color:var(--red-ink)}
+.vs-banner-amber{background:var(--amber-bg);border-color:var(--amber-line);color:var(--amber-ink)}
+.vs-banner-teal{background:var(--teal-bg);border-color:var(--teal-line);color:var(--teal-ink)}
+.vs-banner h4{margin:0 0 var(--s-2);color:inherit;font-size:var(--fs-16)}
+
+/* ---------- Pill / Tag ---------- */
+.vs-tag{display:inline-block;font-family:var(--font-mono);font-size:var(--fs-11);padding:2px 9px;border-radius:999px;border:1px solid;line-height:1.6;white-space:nowrap}
+.vs-tag-info{background:var(--blue-bg);border-color:var(--blue-line);color:var(--blue-ink)}
+.vs-tag-ok{background:var(--teal-bg);border-color:var(--teal-line);color:var(--teal-ink)}
+.vs-tag-warn{background:var(--amber-bg);border-color:var(--amber-line);color:var(--amber-ink)}
+.vs-tag-err{background:var(--red-bg);border-color:var(--red-line);color:var(--red-ink)}
+.vs-tag-new{background:var(--purple-bg);border-color:var(--purple-line);color:var(--purple-ink)}
+.vs-tag-plain{background:var(--soft2);border-color:var(--line2);color:var(--ink2)}
+
+/* ---------- KPI ---------- */
+.vs-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-4);margin:var(--s-4) 0}
+.vs-kpi{background:var(--soft);border-radius:var(--r-md);padding:var(--s-3) var(--s-4);border:1px solid var(--line)}
+.vs-kpi-n{font-family:var(--font-mono);font-size:var(--fs-18);font-weight:var(--w-mid);display:block;color:var(--ink)}
+.vs-kpi-l{font-size:var(--fs-11);color:var(--ink3);display:block;line-height:1.5;margin-top:2px}
+
+/* ---------- 表格 ---------- */
+.vs-tablewrap{overflow-x:auto;margin:var(--s-4) 0}
+.vs-table{width:100%;border-collapse:collapse;font-size:var(--fs-13)}
+.vs-table th,.vs-table td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+.vs-table th{font-weight:var(--w-mid);font-size:var(--fs-11);letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);background:var(--soft)}
+.vs-table td.vs-num,.vs-table th.vs-num{text-align:right;font-family:var(--font-mono);font-size:var(--fs-12);white-space:nowrap}
+.vs-table tbody tr:hover{background:var(--soft)}
+.vs-row-hl{background:var(--amber-bg)!important}
+.vs-yes{color:var(--teal);font-weight:var(--w-mid)}
+.vs-no{color:var(--ink4)}
+.vs-table caption{caption-side:top;text-align:left;font-size:var(--fs-12);color:var(--ink3);padding-bottom:var(--s-2)}
+
+/* ---------- 双栏 ---------- */
+.vs-2col{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5);margin:var(--s-4) 0}
+.vs-2col>*{min-width:0}
+
+/* ---------- 步骤 ---------- */
+.vs-steps{display:grid;gap:var(--s-3);margin:var(--s-4) 0}
+.vs-step{display:grid;grid-template-columns:34px 1fr;gap:var(--s-3);align-items:start}
+.vs-step-n{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:var(--fs-12);background:var(--soft2);border:1px solid var(--line2);color:var(--ink2)}
+.vs-step-done .vs-step-n{background:var(--teal-bg);border-color:var(--teal-line);color:var(--teal-ink)}
+.vs-step-active .vs-step-n{background:var(--blue);border-color:var(--blue);color:#fff}
+.vs-step-b{font-size:var(--fs-13);color:var(--ink2);line-height:1.7}
+.vs-step-b strong{display:block;color:var(--ink);font-size:var(--fs-15);font-family:var(--font-serif)}
+
+/* ---------- 进度条 ---------- */
+.vs-bar{height:8px;background:var(--soft2);border-radius:999px;overflow:hidden;margin:var(--s-2) 0}
+.vs-bar i{display:block;height:100%;border-radius:999px;background:var(--ink3)}
+.vs-bar-ok i{background:var(--teal)}
+.vs-bar-warn i{background:var(--amber)}
+.vs-bar-err i{background:var(--red)}
+.vs-bar-info i{background:var(--blue)}
+
+/* ---------- 图 ---------- */
+.vs-fig{margin:var(--s-5) 0}
+.vs-fig svg{display:block;width:100%;height:auto}
+.vs-fig figcaption{font-size:var(--fs-12);color:var(--ink3);margin-top:var(--s-2);line-height:1.6}
+
+/* ---------- 折叠 ---------- */
+details.vs-acc{border:1px solid var(--line);border-radius:var(--r-md);margin:var(--s-3) 0;background:var(--bg)}
+details.vs-acc>summary{cursor:pointer;padding:var(--s-3) var(--s-4);font-size:var(--fs-13);font-weight:var(--w-mid);list-style:none}
+details.vs-acc>summary::-webkit-details-marker{display:none}
+details.vs-acc>summary::before{content:"▸ ";color:var(--ink3)}
+details.vs-acc[open]>summary::before{content:"▾ "}
+details.vs-acc>.vs-acc-b{padding:0 var(--s-4) var(--s-4);font-size:var(--fs-13);color:var(--ink2)}
+
+/* ---------- 交互原型 ---------- */
+.demo{border:1px solid var(--line2);border-radius:var(--r-lg);background:var(--soft);padding:var(--s-5);margin:var(--s-5) 0}
+.demo-hd{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-3);flex-wrap:wrap;margin-bottom:var(--s-4)}
+.demo-hd h4{margin:0;font-family:var(--font-serif);font-size:var(--fs-16)}
+.btnrow{display:flex;gap:var(--s-2);flex-wrap:wrap;margin-bottom:var(--s-4)}
+.vs-btn{
+  font-family:var(--font-sans);font-size:var(--fs-12);padding:7px 14px;border-radius:999px;
+  border:1px solid var(--line2);background:var(--bg);color:var(--ink2);cursor:pointer;
+  transition:all var(--dur-fast) var(--ease-out);font-weight:var(--w-mid)
+}
+.vs-btn:hover{border-color:var(--ink3);color:var(--ink)}
+.vs-btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.sliderrow{display:grid;grid-template-columns:1fr auto;gap:var(--s-3);align-items:center;margin:var(--s-3) 0}
+input[type=range]{width:100%;accent-color:var(--teal);height:22px}
+.rx{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-md);padding:var(--s-4)}
+.rx-hd{display:flex;justify-content:space-between;align-items:center;gap:var(--s-3);flex-wrap:wrap;margin-bottom:var(--s-3)}
+.rx-g{font-family:var(--font-mono);font-size:var(--fs-11);padding:3px 10px;border-radius:6px;border:1px solid;font-weight:var(--w-mid)}
+.rx-gA{background:var(--teal-bg);border-color:var(--teal-line);color:var(--teal-ink)}
+.rx-gB{background:var(--amber-bg);border-color:var(--amber-line);color:var(--amber-ink)}
+.rx-gC{background:var(--blue-bg);border-color:var(--blue-line);color:var(--blue-ink)}
+.rx-gD{background:var(--soft2);border-color:var(--line2);color:var(--ink3)}
+.rx-gX{background:var(--red-bg);border-color:var(--red-line);color:var(--red-ink)}
+.rx-line{display:flex;justify-content:space-between;gap:var(--s-3);font-size:var(--fs-13);padding:6px 0;border-bottom:1px dotted var(--line)}
+.rx-line:last-child{border-bottom:0}
+.rx-line b{font-family:var(--font-mono);font-weight:var(--w-mid);color:var(--ink);white-space:nowrap}
+.rx-verdict{margin-top:var(--s-3);font-size:var(--fs-13);padding:var(--s-3);border-radius:var(--r-sm);background:var(--soft2)}
+.refuse{display:none}
+.refuse.on{display:block}
+.rx-normal.off{display:none}
+
+/* ---------- 页脚 ---------- */
+footer{margin-top:var(--s-8);padding-top:var(--s-5);border-top:1px solid var(--line);font-size:var(--fs-12);color:var(--ink3)}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:900px){
+  .vs-cards-4{grid-template-columns:repeat(2,1fr)}
+  .vs-kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){
+  .vs-cards-4,.vs-cards-3,.vs-cards-2,.vs-2col,.vs-kpis{grid-template-columns:1fr}
+  .vs-wrap{padding:var(--s-6) var(--s-4)}
+  h1{font-size:var(--fs-22)}
+  h2{font-size:var(--fs-18)}
+}
+@media print{
+  .demo{break-inside:avoid}
+  h2{break-after:avoid}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="vs-wrap">
+
+<!-- ══════════════════════════ 封面 ══════════════════════════ -->
+<header>
+  <div class="vs-kicker">OneAquaHealth IEEE Global Hackathon 2026 · 方案书</div>
+  <h1>RiverPrescription · 河流处方</h1>
+  <p class="dim" style="margin-top:var(--s-2);font-size:var(--fs-16)">
+    给每一次治理花钱，配一张<strong>证据价签</strong>
+  </p>
+  <div class="vs-lede">
+    官方 Resilience Map 告诉你河流<strong>现在怎么样</strong>；官方 DSS 告诉你<strong>有哪些措施可选</strong>。
+    没人回答那个真正决定预算的问题：<strong>做这件事值得吗、对谁有用、要花多少、我们有多确定。</strong>
+    这份方案把我们的模型链装进那个缺口，并给每一条建议贴上可核查的证据等级。
+  </div>
+  <div class="vs-kpis">
+    <div class="vs-kpi"><span class="vs-kpi-n">85</span><span class="vs-kpi-l">站点 · 5 城 · 32 项实测字段</span></div>
+    <div class="vs-kpi"><span class="vs-kpi-n">106</span><span class="vs-kpi-l">官方地图站点（开放 API 实测）</span></div>
+    <div class="vs-kpi"><span class="vs-kpi-n">20</span><span class="vs-kpi-l">张可复现结果表</span></div>
+    <div class="vs-kpi"><span class="vs-kpi-n">9</span><span class="vs-kpi-l">道自动门禁，全绿</span></div>
+  </div>
+</header>
+
+<!-- ══════════════════════════ 0 结论卡 ══════════════════════════ -->
+<h2>0 · 先给结论</h2>
+<div class="vs-cards vs-cards-4">
+  <div class="vs-card vs-card-blue">
+    <span class="vs-card-n">做</span>
+    <h4>把「处方」做成产品</h4>
+    <p>官方生态里缺的是<strong>定量决策层</strong>：剂量、疗效、受众、成本、置信度。这不是又一个地图，是地图下面那一层。</p>
+  </div>
+  <div class="vs-card vs-card-teal">
+    <span class="vs-card-n">敢</span>
+    <h4>敢说「这条不成立」</h4>
+    <p>我们的因果检验显示：<strong>溶氧显著（p=0.0045）、流速不显著（p=0.36）</strong>。据此我们建议城市<em>不要</em>单独为流速花钱。这一句话比任何可视化都值钱。</p>
+  </div>
+  <div class="vs-card vs-card-amber">
+    <span class="vs-card-n">改</span>
+    <h4>换一个视角：点 → 线</h4>
+    <p>官方是地图视角（一堆点）。河流是线性系统，天然视角是<strong>纵向剖面</strong>——上游一个动作如何传到下游，只有「线」能讲清。</p>
+  </div>
+  <div class="vs-card vs-card-red">
+    <span class="vs-card-n">险</span>
+    <h4>最薄弱的一环</h4>
+    <p>我们的 85 站点城市标签与官方 5 个示范城市<strong>只重合 2 个</strong>。这条必须在提交前澄清，否则直接威胁 30% 权重的 Impact 项。</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════ 1 官方生态 ══════════════════════════ -->
+<h2>1 · 官方生态拆解（全部实测，非文档转述）</h2>
+
+<p>为了知道该补哪一块，先把官方已有的东西拆开看。以下不是读文档得到的，是<strong>直接读它的前端产物并调用它的后端 API</strong> 得到的。</p>
+
+<h3>1.1 官方六件工具</h3>
+<div class="vs-tablewrap">
+<table class="vs-table">
+  <caption>来源：oneaquahealth.eu/project-solutions/ 与官方 DipteraCAST 文章（2026-07-31）</caption>
+  <thead><tr><th>工具</th><th>做什么</th><th>给谁</th><th>性质</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Resilience Map</strong></td><td>指标浏览器：生物多样性、环境、病原体、天气、卫星指标；动态地图/图/表，可导出</td><td>研究者、机构</td><td>描述性</td></tr>
+    <tr><td><strong>City Dashboards</strong></td><td>按城市的指标看板（水质、生物多样性、污染）</td><td>市民、研究者、公共机构</td><td>描述性</td></tr>
+    <tr><td><strong>Citizen Science App</strong></td><td>公民上报点位与观测</td><td>公众</td><td>数据采集</td></tr>
+    <tr><td><strong>GEOSSIP</strong></td><td>数据管理与共享平台</td><td>授权用户</td><td>基础设施</td></tr>
+    <tr><td><strong>Decision Support System</strong></td><td>选指标 → 识别障碍与胁迫因子 → 推荐匹配措施。官方自述：「支持专家判断，不替代专家判断」</td><td>决策者</td><td><strong>定性</strong></td></tr>
+    <tr><td><strong>DipteraCAST</strong><br><span class="xs dim">ENORA Innovation</span></td><td>用环境描述符预测双翅目<strong>群落组成</strong>（55 个分类单元）；RF / LR / SVM / XGBoost 多标签框架；RF 总体最优、LR 稀有物种更优</td><td>研究者、环境从业者</td><td>预测性<br><span class="xs dim">官方称「计划集成进 OIH」</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>1.2 Resilience Map 的真实技术栈与数据模型</h3>
+<div class="vs-2col">
+  <div>
+    <h4>技术栈（读打包产物得到）</h4>
+    <p class="sm">
+      <span class="vs-tag vs-tag-plain">React</span>
+      <span class="vs-tag vs-tag-plain">Redux Toolkit</span>
+      <span class="vs-tag vs-tag-plain">MUI</span>
+      <span class="vs-tag vs-tag-plain">Leaflet 1.7</span>
+      <span class="vs-tag vs-tag-plain">React Router</span>
+    </p>
+    <p class="sm dim">后端：<code>api.enora-oah.eu/api</code>（Spring，返回结构化 JSON）。底图：ArcGIS World Imagery / OpenStreetMap。</p>
+    <div class="vs-note vs-note-teal">
+      <strong>关键实测结论：读取端点无需鉴权。</strong>
+      我们直接 <code>curl</code> 就拿到了全部数据。这意味着「接入官方系统」不是一句愿景，是今天就能做的工作量。
+    </div>
+  </div>
+  <div>
+    <h4>可用的数据端点（已实测返回 200）</h4>
+    <div class="vs-tablewrap">
+    <table class="vs-table">
+      <thead><tr><th>端点</th><th class="vs-num">规模</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">/cities/all</td><td class="vs-num">5</td><td>城市</td></tr>
+        <tr><td class="mono">/sites/all</td><td class="vs-num">106</td><td>站点（含多边形、经纬度、海拔）</td></tr>
+        <tr><td class="mono">/sites/user-generated</td><td class="vs-num">71</td><td>公民上报点位</td></tr>
+        <tr><td class="mono">/resilience-map/health-risks</td><td class="vs-num">96</td><td>病原体/粪源/ARG 风险 + 健康风险分</td></tr>
+        <tr><td class="mono">/resilience-map/urban-parameters</td><td class="vs-num">104×56</td><td>植被盖度、不透水率、人口代理，50→2000 m 共 8 个半径；到医院/高速/污水厂距离</td></tr>
+        <tr><td class="mono">/resilience-map/weather/*</td><td class="vs-num">—</td><td>高温日、热浪、湿日、干日、暴雨日、最长干旱期（需 siteCode+时间窗）</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="vs-src">实测时间：2026-10-04。ARG = 抗生素抗性基因。</p>
+  </div>
+</div>
+
+<h3>1.3 官方地图的能力边界 —— 这就是我们的位置</h3>
+<p>把「官方有」和「官方没有」并排放，缺口一目了然。<strong>缺口不是可视化，是量化决策。</strong></p>
+
+<div class="vs-tablewrap">
+<table class="vs-table">
+  <thead>
+    <tr>
+      <th>能力</th>
+      <th>Resilience Map</th>
+      <th>City Dashboards</th>
+      <th>官方 DSS</th>
+      <th>官方 DipteraCAST</th>
+      <th>我们</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>现状指标浏览 / 地图 / 导出</td><td class="vs-yes">有</td><td class="vs-yes">有</td><td class="vs-no">—</td><td class="vs-no">—</td><td class="vs-yes">有</td></tr>
+    <tr><td>公民科学接入</td><td class="vs-yes">有</td><td class="vs-no">—</td><td class="vs-no">—</td><td class="vs-no">—</td><td class="vs-yes">可接入</td></tr>
+    <tr><td>措施推荐</td><td class="vs-no">—</td><td class="vs-no">—</td><td class="vs-yes">有（定性）</td><td class="vs-no">—</td><td class="vs-yes">有（定量）</td></tr>
+    <tr><td>物种群落预测</td><td class="vs-no">—</td><td class="vs-no">—</td><td class="vs-no">—</td><td class="vs-yes">有</td><td class="vs-yes">扩展</td></tr>
+    <tr class="vs-row-hl"><td><strong>因果效应估计</strong><span class="xs dim">「哪个指标真的致病」</span></td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-yes"><strong>有</strong></td></tr>
+    <tr class="vs-row-hl"><td><strong>反事实定量</strong><span class="xs dim">「做这件事能降多少」</span></td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-yes"><strong>有</strong></td></tr>
+    <tr class="vs-row-hl"><td><strong>人群风险 PAR</strong><span class="xs dim">「保护了谁、多少人」</span></td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-yes"><strong>有</strong></td></tr>
+    <tr class="vs-row-hl"><td><strong>健康经济 / DALY</strong><span class="xs dim">「值多少钱、几年回本」</span></td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-yes"><strong>有</strong></td></tr>
+    <tr><td>前向仿真（30 天 / 2050 气候）</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-yes">有</td></tr>
+    <tr><td>运行告警名册 / SOP</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-yes">有</td></tr>
+    <tr><td>校准拒答（超出适用域不说）</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-no">无</td><td class="vs-yes">有</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="vs-src">「有/无」依据官方 Solutions 页自述 + 官方 DipteraCAST 文章 + 我们的 API 实测。带底色的三行是本次方案的着力点。</p>
+
+<div class="vs-note vs-note-amber">
+  <strong>必须承认的一件事：</strong>官方 DipteraCAST 已经存在，而且用的是同一批 85 站点数据。
+  我们<strong>不是首创者</strong>。我们的位置是<strong>把它从「预测」推进到「决策」</strong>——
+  官方回答「那里会有哪些昆虫」，我们回答「如果我们动手，会怎样、谁受益、花多少、多确定」。
+  这个定位既诚实又比硬碰硬地重造一个预测器更容易赢。
+</div>
+
+<!-- ══════════════════════════ 2 我们的资产 ══════════════════════════ -->
+<h2>2 · 我们手里有什么（含硬缺陷清单）</h2>
+
+<h3>2.1 四个看板的诚实审计</h3>
+<div class="vs-tablewrap">
+<table class="vs-table">
+  <thead><tr><th>交付物</th><th>定位</th><th>优点</th><th>问题</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Interactive Dashboard</strong><br><span class="xs dim">322 KB</span></td>
+      <td>「河流日记」叙事页：一条河的心情、三个拉杆、四张生活化后果卡</td>
+      <td>对普通群众友好；拉杆各管一条通道且复现审计口径；术语收进抽屉</td>
+      <td>一次只看一座城，没有跨城比较；地图埋在页面下方；与官方数据无连接</td>
+    </tr>
+    <tr>
+      <td><strong>Variant A</strong><br><span class="xs dim">Industrial Digital Twin</span></td>
+      <td>工业风数字孪生</td>
+      <td>信息密度高，像专业工具</td>
+      <td>与 Variant B 是同一套数据的两种皮肤，<strong>没有功能差异</strong>；对市民不可读</td>
+    </tr>
+    <tr>
+      <td><strong>Variant B</strong><br><span class="xs dim">Modern SaaS</span></td>
+      <td>市政气候韧性平台风</td>
+      <td>版式干净</td>
+      <td>同上：换皮不换功能。两个变体并存本身就是<strong>决策未定</strong>的证据</td>
+    </tr>
+    <tr>
+      <td><strong>3-Min Pitch Deck</strong><br><span class="xs dim">56 KB</span></td>
+      <td>三分钟路演</td>
+      <td>叙事清楚，H3 诚实零结果讲得漂亮</td>
+      <td>静态，无法承载「让他自己试」的说服力</td>
+    </tr>
+    <tr class="vs-row-hl">
+      <td><strong>全部四个</strong></td>
+      <td colspan="3">
+        <strong>共同缺陷：依赖外部 CDN（Tailwind / Leaflet / KaTeX / Google Fonts）。</strong>
+        我们把 CDN 全部屏蔽后实测：<strong>四个页面的 Tailwind 工具类全部失效</strong>
+        （<code>.hidden</code>、<code>.flex</code> 均不生效，441 / 77 / 82 / 160 个类名变成死文本），
+        Variant A / B / Deck 的页面高度全部塌缩到 1257 px。
+        评委离线打开、或从压缩包里打开，看到的就是一页无样式文本。
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="vs-src">CDN 屏蔽实测：CDP <code>Network.setBlockedURLs</code> 拦截 cdn.tailwindcss.com / unpkg.com / cdn.jsdelivr.net / fonts.googleapis.com 后测量计算样式。</p>
+
+<h3>2.2 我们的模型是怎么算的</h3>
+<p>这是本次方案的技术底盘。整条链有<strong>八节</strong>，每一节都可复跑，每一节都有对应的结果表。</p>
+
+<div class="vs-fig">
+<svg viewBox="0 0 680 420" role="img" aria-label="模型计算链：从 85 站点实测数据到处方输出">
+  <defs>
+    <marker id="ar" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 z" fill="#a3a39a"/>
+    </marker>
+  </defs>
+  <!-- 输入 -->
+  <rect x="14" y="16" width="150" height="52" rx="8" fill="#f3f1ea" stroke="#cfcdc2"/>
+  <text x="89" y="38" text-anchor="middle" font-size="12" font-weight="500" fill="#1b1b19" font-family="system-ui">85 站点 · 5 城</text>
+  <text x="89" y="55" text-anchor="middle" font-size="10.5" fill="#77776f" font-family="system-ui">32 项实测字段</text>
+
+  <rect x="14" y="86" width="150" height="52" rx="8" fill="#f3f1ea" stroke="#cfcdc2"/>
+  <text x="89" y="108" text-anchor="middle" font-size="12" font-weight="500" fill="#1b1b19" font-family="system-ui">气象 + 遥感 + CMIP6</text>
+  <text x="89" y="125" text-anchor="middle" font-size="10.5" fill="#77776f" font-family="system-ui">ERA5 / Copernicus / 官方手册</text>
+
+  <!-- 特征 -->
+  <rect x="196" y="50" width="118" height="52" rx="8" fill="#eaf1f9" stroke="#cddff0"/>
+  <text x="255" y="72" text-anchor="middle" font-size="12" font-weight="500" fill="#0c447c" font-family="system-ui">特征工程</text>
+  <text x="255" y="89" text-anchor="middle" font-size="10.5" fill="#1a4f8a" font-family="system-ui">32 → 49 列</text>
+
+  <!-- 三层 -->
+  <rect x="346" y="16" width="150" height="52" rx="8" fill="#e6f2ee" stroke="#c9e4da"/>
+  <text x="421" y="34" text-anchor="middle" font-size="11.5" font-weight="500" fill="#085041" font-family="system-ui">③ 因果层 DML</text>
+  <text x="421" y="50" text-anchor="middle" font-size="10" fill="#0f6e56" font-family="system-ui">溶氧 / 流速 → 风险</text>
+  <text x="421" y="63" text-anchor="middle" font-size="10" fill="#0f6e56" font-family="system-ui">交叉拟合 + 城市聚类稳健</text>
+
+  <rect x="346" y="86" width="150" height="52" rx="8" fill="#eaf1f9" stroke="#cddff0"/>
+  <text x="421" y="104" text-anchor="middle" font-size="11.5" font-weight="500" fill="#0c447c" font-family="system-ui">④ 预测层 5 模型</text>
+  <text x="421" y="120" text-anchor="middle" font-size="10" fill="#1a4f8a" font-family="system-ui">EN/RF/XGB/LGBM/CatBoost</text>
+  <text x="421" y="133" text-anchor="middle" font-size="10" fill="#1a4f8a" font-family="system-ui">+ Super Learner，留一城市</text>
+
+  <rect x="346" y="156" width="150" height="52" rx="8" fill="#eeedfb" stroke="#cfc6f2"/>
+  <text x="421" y="174" text-anchor="middle" font-size="11.5" font-weight="500" fill="#3c3489" font-family="system-ui">⑤ 空间层 Stream-GAT</text>
+  <text x="421" y="190" text-anchor="middle" font-size="10" fill="#4b3f9e" font-family="system-ui">河网图注意力 vs 非空间 MLP</text>
+  <text x="421" y="203" text-anchor="middle" font-size="10" fill="#4b3f9e" font-family="system-ui">结果：H3 未能拒绝 H0</text>
+
+  <rect x="346" y="226" width="150" height="52" rx="8" fill="#faf1e0" stroke="#eddcb8"/>
+  <text x="421" y="244" text-anchor="middle" font-size="11.5" font-weight="500" fill="#633806" font-family="system-ui">⑥ 机制层 Brière ODE</text>
+  <text x="421" y="260" text-anchor="middle" font-size="10" fill="#8a5a10" font-family="system-ui">库蚊生活史 30 天数值仿真</text>
+  <text x="421" y="273" text-anchor="middle" font-size="10" fill="#8a5a10" font-family="system-ui">文献参数化，非实测干预</text>
+
+  <!-- 检验 -->
+  <rect x="524" y="50" width="142" height="52" rx="8" fill="#f3f1ea" stroke="#cfcdc2"/>
+  <text x="595" y="70" text-anchor="middle" font-size="11.5" font-weight="500" fill="#1b1b19" font-family="system-ui">⑦ 假设检验 H1/H2/H3</text>
+  <text x="595" y="86" text-anchor="middle" font-size="10" fill="#77776f" font-family="system-ui">预先指定 + 置换检验</text>
+
+  <!-- 输出 -->
+  <rect x="196" y="306" width="470" height="46" rx="8" fill="#085041" stroke="#085041"/>
+  <text x="431" y="326" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff" font-family="system-ui">⑧ One Health 空间人口层：PAR → DALY → 成本 → 回收期</text>
+  <text x="431" y="342" text-anchor="middle" font-size="10.5" fill="#c9e4da" font-family="system-ui">97,790.6 暴露单位 · 47.68% 相对削减 · 33.94% 缓冲人口</text>
+
+  <!-- 输出到处方 -->
+  <rect x="196" y="368" width="470" height="40" rx="8" fill="#1a4f8a" stroke="#1a4f8a"/>
+  <text x="431" y="393" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff" font-family="system-ui">处方输出：剂量 · 疗效 · 受众 · 成本 · 证据价签</text>
+
+  <!-- 箭头 -->
+  <g stroke="#a3a39a" stroke-width="1.2" fill="none" marker-end="url(#ar)">
+    <path d="M164,42 L192,66"/>
+    <path d="M164,112 L192,86"/>
+    <path d="M314,66 L342,42"/>
+    <path d="M314,76 L342,106"/>
+    <path d="M314,86 L342,176"/>
+    <path d="M314,92 L342,246"/>
+    <path d="M496,42 L520,66"/>
+    <path d="M496,106 L520,86"/>
+    <path d="M496,176 L520,80"/>
+    <path d="M496,246 L520,90"/>
+    <path d="M421,278 L421,302"/>
+    <path d="M595,102 L595,300 L672,300 L672,391 L670,391"/>
+  </g>
+</svg>
+<figcaption>八节计算链。③④⑤⑥ 是四个并行的「证据来源」，⑦ 对它们做正式检验，⑧ 把它们折算成人和钱。</figcaption>
+</div>
+
+<h4>每一节的实测结果与它给出的证据等级</h4>
+<div class="vs-tablewrap">
+<table class="vs-table">
+  <thead><tr><th>节</th><th>方法</th><th>关键结果</th><th>证据等级</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>③ 因果</td><td>DML（双重机器学习），交叉拟合残差，城市聚类稳健标准误，n=85 / 5 聚类</td>
+      <td><strong>溶氧：β = −0.2818 / +1 mg/L，p = 0.0045，CI [−0.418, −0.146]</strong><br>
+          流速：β = −0.3512 / +0.1 m/s，<strong>p = 0.3623</strong>，CI [−1.300, +0.598]</td>
+      <td><span class="vs-tag vs-tag-ok">A 因果已证</span> / <span class="vs-tag vs-tag-warn">B 未证因果</span></td>
+    </tr>
+    <tr>
+      <td>④ 预测</td><td>五模型族 + 非负岭 Super Learner，严格留一城市（LOCO），双靶标（分类 vector_risk / 回归 bio_score）</td>
+      <td>各城最优 PR-AUC：Antwerp 0.991 · Athens 0.979 · <strong>Coimbra 0.814</strong> · Milan 1.000 · Toulouse 1.000。<strong>Coimbra 是最难的一城</strong></td>
+      <td><span class="vs-tag vs-tag-info">预测能力</span></td>
+    </tr>
+    <tr>
+      <td>⑤ 空间</td><td>河网图注意力网络（Stream-GAT）对比非空间 MLP，逐城配对</td>
+      <td>五城河网<strong>全部是 simple_directed_chain</strong>（17 节点 / 16 边 / 分叉节点 0）。GAT 赢 2 城输 3 城，平均配对差 −0.0657，<strong>p = 0.3125</strong></td>
+      <td><span class="vs-tag vs-tag-err">诚实零结果</span></td>
+    </tr>
+    <tr>
+      <td>⑥ 机制</td><td>Brière 温度依赖型库蚊生活史 ODE，30 天数値积分</td>
+      <td>污染情景累计羽化 372.25 → 修复情景 308.73，<strong>−17.07%</strong></td>
+      <td><span class="vs-tag vs-tag-info">C 机制情景</span></td>
+    </tr>
+    <tr>
+      <td>⑦ 检验</td><td>Popperian 正式检验：H1 缺氧→捕食释放、H2 水力剪切阈值、H3 拓扑可迁移</td>
+      <td>H1 p = 0.0023 拒绝 H0 · H2 p = 0.0037 拒绝 H0（但局部线性阈值对比 p≈0.34，<strong>不支持 0.30 m/s 硬阈值</strong>）· H3 p = 0.3125 未能拒绝</td>
+      <td><span class="vs-tag vs-tag-warn">含反证</span></td>
+    </tr>
+    <tr>
+      <td>⑧ 人口</td><td>风险加权人口 PAR = P(媒介) × 人口；500 m 缓冲；DALY + 医疗成本 + 回收期</td>
+      <td>合计 <strong>97,790.6</strong> 暴露单位，占基线 PAR <strong>47.68%</strong>、占缓冲人口 <strong>33.94%</strong>。Coimbra：7,913 单位 / 1,859 位 65+ / €45,746 / 回收期 5.6 年</td>
+      <td><span class="vs-tag vs-tag-info">模型情景</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="vs-src">全部数字来自 <code>Project_A_EcoSentinel_DipteraCAST/outputs/tables/</code> 的 20 张 CSV，由 <code>bash scripts/verify_p0_1_all.sh</code>（9 道门禁）守护。</p>
+
+<div class="vs-fig">
+  <svg viewBox="0 0 680 200" role="img" aria-label="溶氧与流速对媒介风险的因果效应及 95% 置信区间">
+    <!-- 轴 -->
+    <line x1="150" y1="168" x2="640" y2="168" stroke="#e3e1d8"/>
+    <!-- 零线 -->
+    <line x1="461.8" y1="24" x2="461.8" y2="168" stroke="#cfcdc2" stroke-dasharray="4 3"/>
+    <text x="461.8" y="184" text-anchor="middle" font-size="10.5" fill="#77776f" font-family="system-ui">0（无效应）</text>
+    <!-- 刻度 -->
+    <text x="150" y="184" text-anchor="middle" font-size="10.5" fill="#a3a39a" font-family="system-ui">−1.4</text>
+    <text x="640" y="184" text-anchor="middle" font-size="10.5" fill="#a3a39a" font-family="system-ui">+0.8</text>
+    <text x="395" y="16" text-anchor="middle" font-size="11" fill="#77776f" font-family="system-ui">媒介风险概率的变化量</text>
+
+    <!-- 溶氧行 -->
+    <text x="138" y="72" text-anchor="end" font-size="12" font-weight="500" fill="#1b1b19" font-family="system-ui">溶氧</text>
+    <text x="138" y="88" text-anchor="end" font-size="10" fill="#77776f" font-family="system-ui">每 +1 mg/L</text>
+    <line x1="368.8" y1="70" x2="429.3" y2="70" stroke="#0f6e56" stroke-width="2.5"/>
+    <line x1="368.8" y1="63" x2="368.8" y2="77" stroke="#0f6e56" stroke-width="2"/>
+    <line x1="429.3" y1="63" x2="429.3" y2="77" stroke="#0f6e56" stroke-width="2"/>
+    <circle cx="399.1" cy="70" r="6" fill="#0f6e56"/>
+    <text x="399.1" y="52" text-anchor="middle" font-size="11" font-weight="500" fill="#085041" font-family="system-ui">−0.2818</text>
+    <text x="399.1" y="98" text-anchor="middle" font-size="10" fill="#0f6e56" font-family="system-ui">p = 0.0045 ✓</text>
+
+    <!-- 流速行 -->
+    <text x="138" y="136" text-anchor="end" font-size="12" font-weight="500" fill="#1b1b19" font-family="system-ui">流速</text>
+    <text x="138" y="152" text-anchor="end" font-size="10" fill="#77776f" font-family="system-ui">每 +0.1 m/s</text>
+    <line x1="172.2" y1="134" x2="595.0" y2="134" stroke="#8a5a10" stroke-width="2.5"/>
+    <line x1="172.2" y1="127" x2="172.2" y2="141" stroke="#8a5a10" stroke-width="2"/>
+    <line x1="595.0" y1="127" x2="595.0" y2="141" stroke="#8a5a10" stroke-width="2"/>
+    <circle cx="383.6" cy="134" r="6" fill="#8a5a10"/>
+    <text x="383.6" y="116" text-anchor="middle" font-size="11" font-weight="500" fill="#633806" font-family="system-ui">−0.3512</text>
+    <text x="383.6" y="162" text-anchor="middle" font-size="10" fill="#8a5a10" font-family="system-ui">p = 0.3623 ✗（区间跨过 0）</text>
+  </svg>
+  <figcaption>
+    这张图就是整个项目的核心论点。溶氧的 95% 区间<strong>完全落在 0 的左侧</strong>——效应真实存在；
+    流速的区间<strong>横跨 0</strong>——点估计看着更大，但证据不支持。
+    所以「把溶氧抬上去」值得投，「为流速单独投钱」不值得。
+  </figcaption>
+</div>
+
+<h3>2.3 硬缺陷清单（必须在提交前处理）</h3>
+<div class="vs-tablewrap">
+<table class="vs-table">
+  <thead><tr><th class="vs-num">#</th><th>缺陷</th><th>证据</th><th>影响</th></tr></thead>
+  <tbody>
+    <tr class="vs-row-hl">
+      <td class="vs-num">1</td>
+      <td><strong>城市口径冲突</strong></td>
+      <td>官方 5 个示范城市 = <strong>Coimbra / Toulouse / Benevento / Gent / Oslo</strong>（Resilience Map API 实测 + 工作区 <code>OneAquaHealth_IEEE_Topics_Overview.md</code> 自述，两者一致）。<br>
+          我们的数据 = <strong>Antwerp / Athens / Coimbra / Milan / Toulouse</strong>。<br>
+          空间最近邻：<strong>85 个站点里 0 个落在官方站点 500 m 内</strong>；只有 34/85 与官方站点同城。Antwerp 最近官方站是 Gent（51 km），Athens 最近是 Benevento（837 km），Milan 最近是 Toulouse（643 km）。</td>
+      <td><span class="vs-tag vs-tag-err">高</span> 任何「覆盖官方 5 个示范城市」的表述都可被当场证伪</td>
+    </tr>
+    <tr>
+      <td class="vs-num">2</td>
+      <td><code>elderly_ratio_pct</code> 每城恒定</td>
+      <td>Antwerp 全部 17 站均为 19.4；同一城的 <code>imperviousness_500m</code>（66.9 / 17.0 / 52.7）与 <code>tree_cover_500m</code>（35.9 / 80.0 / 66.4）却逐站变化</td>
+      <td><span class="vs-tag vs-tag-warn">中</span> 老年人口是城市级广播值，不是 500 m 实测</td>
+    </tr>
+    <tr>
+      <td class="vs-num">3</td>
+      <td>治理成本五城平摊</td>
+      <td>Module 2 中 <code>allocated_nbs_capex_eur</code> 五城均为 255,000</td>
+      <td><span class="vs-tag vs-tag-warn">中</span> 回收期对成本假设极敏感</td>
+    </tr>
+    <tr>
+      <td class="vs-num">4</td>
+      <td>河网全为简单链</td>
+      <td>五城 <code>topology_type_observed = simple_directed_chain</code>，分叉节点 0</td>
+      <td><span class="vs-tag vs-tag-info">低</span> 已如实报告为 H3 零结果，反而加分</td>
+    </tr>
+    <tr>
+      <td class="vs-num">5</td>
+      <td>看板依赖外部 CDN</td>
+      <td>屏蔽 CDN 后 Tailwind 全部失效，页面塌缩</td>
+      <td><span class="vs-tag vs-tag-warn">中</span> 离线评审即失效</td>
+    </tr>
+    <tr>
+      <td class="vs-num">6</td>
+      <td>流速因果不显著</td>
+      <td>p = 0.3623，CI 跨 0</td>
+      <td><span class="vs-tag vs-tag-ok">不是缺陷</span> 是发现，但必须主动讲，不能被评委先发现</td>
+    </tr>
+    <tr>
+      <td class="vs-num">7</td>
+      <td>ECDC 宏观对齐仅探索性</td>
+      <td>Spearman ρ = 0.80，p = 0.104，n = 5，城市级映射为生态代理</td>
+      <td><span class="vs-tag vs-tag-info">低</span> 已在表中标注 <code>exploratory</code></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="vs-banner vs-banner-red">
+  <h4>先把第 1 条说清楚，再谈创意</h4>
+  <p style="margin:0">
+    这份数据里的城市标签和官方示范城市只有 2 个重合，而站点坐标确实落在它标注的城市里
+    （Antwerp 的 <code>Scheldt_Tributary_North</code>、Athens 的 <code>Kifisios_Main_Corridor</code>、
+    Milan 的 <code>Seveso_Navigli_Corridor</code>、Coimbra 的 <code>Mondego_Urban_Reach</code>、
+    Toulouse 的 <code>Garonne_Brienne_Reach</code>——河名都对）。
+    所以数据本身自洽，但<strong>它与官方示范城市是两套站点网络</strong>。
+    提交前必须二选一：要么拿到这批数据的真实出处与城市定义，要么把叙事改成
+    「我们的方法在 85 个站点上验证，并与官方网络在 Coimbra / Toulouse 两城重叠」。
+    <strong>含糊过去是唯一会真正丢分的做法。</strong>
+  </p>
+</div>
+
+<!-- ══════════════════════════ 3 新方案 ══════════════════════════ -->
+<h2>3 · 新方案：RiverPrescription</h2>
+
+<h3>3.1 定位：三条轴上的差异</h3>
+<div class="vs-cards vs-cards-3">
+  <div class="vs-card vs-card-blue">
+    <h4>点 → 线</h4>
+    <p><strong>官方看「点」</strong>：地图上撒站点。<br>
+       <strong>我们看「线」</strong>：河流是线性系统，纵向剖面才是它本来的样子。
+       上游一个动作怎么传到下游、哪一段是瓶颈，只有剖面能回答。</p>
+  </div>
+  <div class="vs-card vs-card-teal">
+    <h4>现在 → 如果</h4>
+    <p><strong>官方看「现在」</strong>：指标快照。<br>
+       <strong>我们看「如果」</strong>：拖动干预，看 30 天羽化、2050 气候、人群风险与成本一起变。
+       把地图变成风洞。</p>
+  </div>
+  <div class="vs-card vs-card-amber">
+    <h4>措施 → 剂量 + 价钱 + 置信度</h4>
+    <p><strong>官方给「措施」</strong>：有哪些办法。<br>
+       <strong>我们给「剂量」</strong>：把溶氧抬到 6.5 mg/L（不是「加强曝气」），
+       外加疗效、受众、€ 和一张证据价签。</p>
+  </div>
+</div>
+
+<h3>3.2 核心创新：证据价签</h3>
+<p>这是整个方案里最应该被记住的东西。城市不是缺建议，是缺<strong>知道哪条建议值得信</strong>。
+所以每一欧元都配一个等级：</p>
+
+<div class="vs-tablewrap">
+<table class="vs-table">
+  <thead><tr><th>等级</th><th>含义</th><th>本项目实例</th><th>证据</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="vs-tag vs-tag-ok">A · 因果已证</span></td>
+      <td>准实验级证据，跨城聚类稳健，区间不跨 0</td>
+      <td><strong>溶氧 → 媒介风险</strong></td>
+      <td>DML β = −0.2818 / +1 mg/L，p = 0.0045，CI [−0.418, −0.146]，5 城聚类稳健，H1 正式检验通过</td>
+    </tr>
+    <tr>
+      <td><span class="vs-tag vs-tag-warn">B · 关联未证因果</span></td>
+      <td>点估计可观但区间跨 0</td>
+      <td><strong>流速 → 媒介风险</strong></td>
+      <td>β = −0.3512 / +0.1 m/s，<strong>p = 0.3623</strong>，CI [−1.300, +0.598]</td>
+    </tr>
+    <tr>
+      <td><span class="vs-tag vs-tag-info">C · 机制情景</span></td>
+      <td>文献参数化机制模型，非实测干预</td>
+      <td><strong>30 天羽化 −17.07%</strong></td>
+      <td>Brière ODE，参数来自文献，官方也把 30 天预测定位为机制情景</td>
+    </tr>
+    <tr>
+      <td><span class="vs-tag vs-tag-plain">D · 生态代理</span></td>
+      <td>宏观对齐，仅探索</td>
+      <td><strong>ECDC 病例对齐</strong></td>
+      <td>Spearman ρ = 0.80，p = 0.104，n = 5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="vs-note vs-note-teal">
+  <strong>它产生的第一个可交付结论：</strong>
+  「把钱花在<strong>溶氧</strong>上（A 级）；<strong>不要</strong>单独为流速投资（B 级）。
+  若要动流速，请把它当作溶氧措施的附带收益，而不是独立预算项。」
+  —— 一句有证据、可审计、能直接进预算会的建议。这是 30% Impact 分最实在的来源。
+</div>
+
+<h3>3.3 四个创意机制</h3>
+<div class="vs-cards vs-cards-2">
+  <div class="vs-card vs-card-teal">
+    <h4>机制一 · 一张数据三张脸</h4>
+    <p>同一次计算，三种抽象层级，<strong>切换不改数字</strong>：<br>
+      · <strong>市民脸</strong>「今天能下水玩吗？」<br>
+      · <strong>市政脸</strong>85 站告警名册 + SOP + 预算<br>
+      · <strong>科研脸</strong>全指标 + 模型卡 + 不确定性 + 导出<br>
+      这直接解决「太抽象、对普通群众不友好」的老问题，而且不牺牲专业深度。</p>
+  </div>
+  <div class="vs-card vs-card-amber">
+    <h4>机制二 · 敢说不知道</h4>
+    <p>每个输出带证据徽章；情景一旦超出训练域，系统<strong>拒绝外推</strong>并说明为什么。<br>
+      训练域实测：溶氧 2.09 – 7.19 mg/L。<br>
+      所以「把溶氧调到 9 mg/L」这种输入，产品<strong>不给答案</strong>——
+      因为它没有证据。把认识论诚实做成产品功能，是这次最容易记住的差异点。</p>
+  </div>
+  <div class="vs-card vs-card-blue">
+    <h4>机制三 · 纵向剖面视图</h4>
+    <p>把一条河画成从左（上游）到右（下游）的剖面，风险、溶氧、告警等级沿程铺开。
+      用我们已有的 <code>river_or_channel_id</code> + <code>reach_distance_m</code> 直接构造。
+      比地图上一堆针脚更能回答「该在哪一段动手」。</p>
+  </div>
+  <div class="vs-card vs-card-purple" style="border-top:3px solid var(--purple)">
+    <h4>机制四 · 活在官方生态里</h4>
+    <p><strong>读</strong>：官方 API 读取端点无需鉴权（已实测），可实时拉取健康风险、城市参数、天气、公民点位。<br>
+      <strong>写</strong>：把「媒介风险 + 干预建议」作为一个新图层回写 OIH。<br>
+      <strong>复用</strong>：官方《Catalogue of Measures》作为措施库（我们已有 PDF）。<br>
+      我们做<strong>一层</strong>，不重造一个平台——这正是 Feasibility 项要的「与既有系统集成」。</p>
+  </div>
+</div>
+
+<h3>3.4 可交互微原型：证据价签 + 拒绝外推</h3>
+<p>下面这个小原型不是效果图，是用真实数字和真实训练域跑的逻辑。试着把溶氧目标拖过 7.19。</p>
+
+<div class="demo">
+  <div class="demo-hd">
+    <h4>处方台 · 交互微原型</h4>
+    <span class="xs dim mono">数据来源：Phase 2 DML ATE / Phase 5 PAR / Module 2 健康经济</span>
+  </div>
+
+  <div class="btnrow" role="group" aria-label="选择措施">
+    <button class="vs-btn" id="bDo" aria-pressed="true">抬高溶氧</button>
+    <button class="vs-btn" id="bFlow" aria-pressed="false">提升流速</button>
+    <button class="vs-btn" id="bPlant" aria-pressed="false">河岸植树</button>
+  </div>
+
+  <div class="sliderrow">
+    <div>
+      <label class="sm dim" for="sDo">目标溶氧 <span class="mono" id="sDoVal">6.5</span> mg/L</label>
+      <input type="range" id="sDo" min="2" max="12" step="0.1" value="6.5">
+    </div>
+    <span class="xs dim mono">训练域 2.09 – 7.19</span>
+  </div>
+
+  <div class="rx">
+    <div class="rx-hd">
+      <div>
+        <strong id="rxName" style="font-family:var(--font-serif);font-size:var(--fs-16)">抬高溶氧</strong>
+        <div class="xs dim" id="rxSub">Aeration → dissolved oxygen</div>
+      </div>
+      <span class="rx-g rx-gA" id="rxGrade">A · 因果已证</span>
+    </div>
+
+    <div class="rx-normal" id="rxNormal">
+      <div class="rx-line"><span>效应估计</span><b id="rxEff">β = −0.2818 / +1 mg/L</b></div>
+      <div class="rx-line"><span>统计显著性</span><b id="rxP">p = 0.0045 ✓</b></div>
+      <div class="rx-line"><span>95% 置信区间</span><b id="rxCi">[−0.418, −0.146]</b></div>
+      <div class="rx-line"><span>预计保护（Coimbra）</span><b id="rxPar">7,913 暴露单位</b></div>
+      <div class="rx-line"><span>其中 65 岁以上</span><b id="rxAge">1,859 人</b></div>
+      <div class="rx-line"><span>避免的急性医疗支出</span><b id="rxCost">€45,746 / 年</b></div>
+      <div class="rx-line"><span>投资回收期</span><b id="rxPay">5.6 年</b></div>
+      <div class="rx-verdict" id="rxVerdict"></div>
+    </div>
+
+    <div class="refuse" id="rxRefuse">
+      <div class="vs-banner vs-banner-red" style="margin:0">
+        <h4>模型拒绝回答</h4>
+        <p style="margin:0" id="refuseWhy"></p>
+      </div>
+    </div>
+  </div>
+
+  <p class="xs dim" style="margin:var(--s-3) 0 0">
+    说明：溶氧与流速的数字是 DML 因果估计的实测值；PAR / 成本 / 回收期来自 Coimbra 情景；
+    「河岸植树」在我们的因果检验里没有独立可分离效应（控制溶氧后 β 接近 0），因此只能给 C 级。
+  </p>
+</div>
+
+<h3>3.5 三张脸长什么样</h3>
+<div class="vs-2col">
+  <div>
+    <h4>市民脸 · 今天能下水玩吗</h4>
+    <div class="vs-card" style="background:var(--soft)">
+      <p style="font-size:var(--fs-13)">
+        <strong style="font-size:var(--fs-18);font-family:var(--font-serif)">可以玩，但别喝生水</strong><br>
+        河水含氧 6.5 mg/L，有机负荷 1.8 mg/L——都在「健康」区间。<br>
+        河岸 100% 有树荫，水温比没树荫的河段低约 2 °C。<br>
+        <span class="xs dim">黄昏时段岸边蚊虫概率 29%（今天 55%）。</span>
+      </p>
+      <p class="xs dim" style="margin-top:var(--s-2)">底下那行永远是同一份计算的另一个说法，不是另一套数字。</p>
+    </div>
+  </div>
+  <div>
+    <h4>市政脸 · 该在哪一段动手</h4>
+    <div class="vs-card" style="background:var(--soft)">
+      <p style="font-size:var(--fs-13)">
+        <strong style="font-size:var(--fs-18);font-family:var(--font-serif)">3 个站点进入 Level 3</strong><br>
+        COI_00 溶氧 5.04、流速 0.188 → 建议曝气 + 入流口清障<br>
+        COI_01 溶氧 3.69 → 优先，涉及 2,359 人缓冲人口<br>
+        <span class="xs dim">预算影响：Coimbra €255,000 → 回收期 5.6 年 · 证据等级 A</span>
+      </p>
+      <p class="xs dim" style="margin-top:var(--s-2)">SOP 文本直接来自 Module 5 的 85 站告警名册。</p>
+    </div>
+  </div>
+</div>
+<div class="vs-note vs-note-blue">
+  <strong>为什么「三张脸」是真正的可用性创新：</strong>多数项目要么做给市民看（专家觉得浅），
+  要么做给专家看（市民看不懂）。同一份计算渲染成三层抽象，是<strong>唯一不需要牺牲任何一方</strong>的做法。
+  而且它把「不改变数字」变成一条可验证的产品承诺。
+</div>
+
+<!-- ══════════════════════════ 4 评分对照 ══════════════════════════ -->
+<h2>4 · 对照官方评分标准</h2>
+<p>按你给的权重逐项自评。每一项都写清<strong>依据</strong>和<strong>我们最薄弱的地方</strong>——
+只写优点的自评表没有信息量。</p>
+
+<div class="vs-tablewrap">
+<table class="vs-table">
+  <thead>
+    <tr>
+      <th>评分标准</th>
+      <th class="vs-num">权重</th>
+      <th class="vs-num">自评</th>
+      <th>依据（可核查）</th>
+      <th>最薄弱处</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Impact &amp; Alignment</strong><br><span class="xs dim">与 OneAquaHealth 使命的对齐</span></td>
+      <td class="vs-num">30%</td>
+      <td class="vs-num"><strong>8.5</strong></td>
+      <td>
+        直接建在官方 85 站点数据上；打通<strong>「水 → 媒介 → 人 → 钱」完整闭环</strong>，
+        这正是使命里「生态健康与人类健康相互依存」的可量化版本；
+        产出 85 站告警名册与 SOP，是「超越项目周期的监测工具」这一目标要的东西。
+      </td>
+      <td>城市口径冲突（缺陷 1）必须在提交前澄清，否则这一项会被反噬</td>
+    </tr>
+    <tr>
+      <td><strong>Innovation &amp; Creativity</strong><br><span class="xs dim">原创性与技术创意</span></td>
+      <td class="vs-num">20%</td>
+      <td class="vs-num"><strong>8.0</strong></td>
+      <td>
+        <strong>证据价签</strong>（把因果强度变成预算语言）· <strong>校准拒答</strong>（把认识论诚实做成功能）·
+        <strong>纵向剖面视角</strong>（按河流的线性本质重画）· <strong>三张脸</strong>（一份计算三种抽象）。
+      </td>
+      <td>官方 DipteraCAST 已存在，我们是<strong>扩展而非首创</strong>。必须主动说明差异，不能含糊</td>
+    </tr>
+    <tr>
+      <td><strong>Technical Implementation</strong><br><span class="xs dim">原型、架构、工具与数据</span></td>
+      <td class="vs-num">20%</td>
+      <td class="vs-num"><strong>8.5</strong></td>
+      <td>
+        20 张可复现结果表；DML 因果 + 五模型 Super Learner + Stream-GAT + Brière ODE + CMIP6 气候；
+        <strong>9 道自动门禁全绿</strong>；官方 API 已实测可接入（无需鉴权）。
+      </td>
+      <td>Stream-GAT 因河网是简单链而无增益——已如实报告为零结果，但技术叙事要解释清楚</td>
+    </tr>
+    <tr>
+      <td><strong>Usability &amp; UX</strong><br><span class="xs dim">易用性、清晰度、可达性</span></td>
+      <td class="vs-num">15%</td>
+      <td class="vs-num"><strong>8.5</strong></td>
+      <td>
+        三张脸分层抽象；正文全大白话、术语收进抽屉；每张卡带「为什么」；
+        <strong>新交付物做成零外部依赖</strong>（现有四个看板屏蔽 CDN 后即失效，这是可修复的差距）。
+      </td>
+      <td>三张脸目前只是设计，尚未实现；现有看板的 CDN 依赖需要修</td>
+    </tr>
+    <tr>
+      <td><strong>Feasibility &amp; Scalability</strong><br><span class="xs dim">落地、扩展、与既有系统集成</span></td>
+      <td class="vs-num">15%</td>
+      <td class="vs-num"><strong>8.0</strong></td>
+      <td>
+        官方 API 开放可读（实测）→ 集成是工程量而非研究问题；
+        官方 DipteraCAST 文章明确写「不限于原始站点，可应用于任何能提供所需环境描述符的地点」——
+        我们的方法继承这一可迁移性；做<strong>一层</strong>而非重造平台。
+      </td>
+      <td>治理成本目前是五城平摊假设，回收期对成本假设高度敏感</td>
+    </tr>
+    <tr class="vs-row-hl">
+      <td colspan="2"><strong>加权合计</strong></td>
+      <td class="vs-num"><strong>8.3</strong></td>
+      <td colspan="2">
+        8.5×0.30 + 8.0×0.20 + 8.5×0.20 + 8.5×0.15 + 8.0×0.15 = <strong>8.33 / 10</strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="vs-note vs-note-amber">
+  <strong>一个必须先解决的口径问题：</strong>
+  工作区里的 <code>OneAquaHealth_IEEE_Topics_Overview.md</code> 用的是<strong>三项</strong>标准
+  （Impact 40% / Innovation 30% / Architecture 30%），而你给的是<strong>五项</strong>
+  （30 / 20 / 20 / 15 / 15）。两者对「架构质量」和「可用性」的权重判断完全不同——
+  三项版本里根本没有 Usability 这一项。请确认哪份是本届的正式标准，我会按它重新配平。
+</div>
+
+<!-- ══════════════════════════ 5 风险 ══════════════════════════ -->
+<h2>5 · 风险与诚实披露</h2>
+
+<div class="vs-cards vs-cards-3">
+  <div class="vs-card vs-card-red">
+    <h4>高 · 城市口径</h4>
+    <p>85 站点的城市标签与官方示范城市只重合 2 个。这是唯一可能<strong>直接击穿 Impact 项</strong>的问题。处理方式只有两种：拿到真实出处，或改写叙事。</p>
+  </div>
+  <div class="vs-card vs-card-amber">
+    <h4>中 · 成本假设</h4>
+    <p>€255,000 五城平摊，导致回收期排序主要由成本驱动而非效益驱动。至少要给出成本敏感性区间。</p>
+  </div>
+  <div class="vs-card vs-card-amber">
+    <h4>中 · 离线可用性</h4>
+    <p>现有四个看板屏蔽 CDN 后完全失效。新交付物必须零外部依赖——这既是风险也是最容易兑现的加分项。</p>
+  </div>
+</div>
+
+<details class="vs-acc">
+  <summary>我们已经主动披露过的技术局限（延续既有审计口径）</summary>
+  <div class="vs-acc-b">
+    <ul style="margin:0;padding-left:1.2em">
+      <li><strong>流速因果不显著</strong>（p = 0.3623）——写成因果会过度解读。</li>
+      <li><strong>H3 未能拒绝 H0</strong>（p = 0.3125）——河网拓扑没有可迁移增益，五城河网全是简单链。</li>
+      <li><strong>不支持 0.30 m/s 硬阈值</strong>——H2 的局部线性阈值对比 p ≈ 0.34，只有组间关联，不是阈值效应。</li>
+      <li><strong>30 天羽化是机制情景</strong>，不是实测干预效果。</li>
+      <li><strong>PAR 是暴露量不是人数</strong>——500 m 缓冲区互相重叠，不能读成「保护了 7,913 个不同的人」。</li>
+      <li><strong>老年人未获得差异化保护</strong>——风险模型没有年龄项，65+ 的相对削减是构造出来的。</li>
+      <li><strong>ECDC 对齐是生态代理</strong>（ρ = 0.80，p = 0.104，n = 5），仅探索性。</li>
+      <li><strong>MAUP</strong>：250 m / 1000 m 半径下的人口是按面积缩放代理，不是真实人口网格，无法估计尺度效应。</li>
+    </ul>
+  </div>
+</details>
+
+<!-- ══════════════════════════ 6 路线图 ══════════════════════════ -->
+<h2>6 · 落地路线图</h2>
+
+<div class="vs-steps">
+  <div class="vs-step vs-step-active">
+    <div class="vs-step-n">1</div>
+    <div class="vs-step-b">
+      <strong>先解决城市口径（最高优先）</strong>
+      确认 85 站点数据的真实出处与城市定义；二选一：拿到正确的城市归属，或把叙事改为「85 站点验证 + 与官方网络在 2 城重叠」。<br>
+      <span class="xs dim">同时把现有看板改造成零外部依赖。</span>
+    </div>
+  </div>
+  <div class="vs-step">
+    <div class="vs-step-n">2</div>
+    <div class="vs-step-b">
+      <strong>接官方 API（读）</strong>
+      拉取 health-risks / urban-parameters / weather / citizen sites，与我们的 85 站点做空间关联。<br>
+      <span class="xs dim">已验证无需鉴权，纯工程量。</span>
+    </div>
+  </div>
+  <div class="vs-step">
+    <div class="vs-step-n">3</div>
+    <div class="vs-step-b">
+      <strong>证据价签 + 三张脸</strong>
+      把 DML / ODE / PAR / 经济四类输出统一挂上 A/B/C/D 等级；实现市民 / 市政 / 科研三层切换。
+    </div>
+  </div>
+  <div class="vs-step">
+    <div class="vs-step-n">4</div>
+    <div class="vs-step-b">
+      <strong>纵向剖面 + 反事实风洞</strong>
+      用 <code>river_or_channel_id</code> + <code>reach_distance_m</code> 画沿程剖面；接入 CMIP6 情景与 2050 气候滑杆。
+    </div>
+  </div>
+  <div class="vs-step">
+    <div class="vs-step-n">5</div>
+    <div class="vs-step-b">
+      <strong>回写图层到 OIH</strong>
+      把「媒介风险 + 干预建议 + 证据等级」作为一个新图层提交给官方 Open Information Hub。
+    </div>
+  </div>
+</div>
+
+<div class="vs-quote">
+  「不要为了显得聪明而堆模型，要为了让人敢花钱而给证据。」
+</div>
+
+<footer>
+  <p>
+    <strong>数据与代码</strong>：85 站点数据集 <code>Project_A_EcoSentinel_DipteraCAST/data/harmonized/</code>；
+    20 张结果表 <code>outputs/tables/</code>；门禁套件 <code>bash scripts/verify_p0_1_all.sh</code>（9/9 通过）。
+  </p>
+  <p>
+    <strong>官方来源</strong>：Resilience Map <code>apps.oneaquahealth.eu/resmap/v2</code>（前端产物与 API 实测 2026-10-04）；
+    Solutions 页 <code>oneaquahealth.eu/project-solutions/</code>；
+    官方 DipteraCAST 文章 2026-07-31；CORDIS 101086521。
+  </p>
+  <p>
+    <strong>免责</strong>：PAR、DALY、成本与回收期均为<strong>模型情景</strong>，不是观测到的干预效果。
+    500 m 缓冲区重叠使 ΔPAR 成为暴露量之和，不是去重人数。
+  </p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ── 真实数字，全部来自 outputs/tables/ ───────────────────────────── */
+  var MEASURES = {
+    do: {
+      name: "抬高溶氧",
+      sub: "Aeration → dissolved oxygen",
+      grade: "A · 因果已证", gradeCls: "rx-gA",
+      eff: "β = −0.2818 / +1 mg/L",
+      p: "p = 0.0045 ✓",
+      ci: "[−0.418, −0.146]",
+      par: "7,913 暴露单位", age: "1,859 人",
+      cost: "€45,746 / 年", pay: "5.6 年",
+      verdict: "值得投资。区间完全落在 0 左侧，5 城聚类稳健，H1 正式检验通过。这是本方案里证据最强的一条措施。"
+    },
+    flow: {
+      name: "提升流速",
+      sub: "Baseflow flush → velocity",
+      grade: "B · 关联未证因果", gradeCls: "rx-gB",
+      eff: "β = −0.3512 / +0.1 m/s",
+      p: "p = 0.3623 ✗",
+      ci: "[−1.300, +0.598]",
+      par: "不建议单独计价", age: "—",
+      cost: "—", pay: "—",
+      verdict: "不建议作为独立预算项。点估计比溶氧还大，但 95% 区间横跨 0，证据不支持。若要动流速，请把它算作溶氧措施的附带收益。"
+    },
+    plant: {
+      name: "河岸植树",
+      sub: "Riparian planting → organic load / water temperature",
+      grade: "C · 机制情景", gradeCls: "rx-gC",
+      eff: "控制溶氧后无可分离效应",
+      p: "β 接近 0",
+      ci: "—",
+      par: "间接收益", age: "—",
+      cost: "—", pay: "—",
+      verdict: "只能作为 C 级机制情景呈现。遮阴降温与削减有机负荷在机制上成立，但在我们的因果框架里，控制溶氧后它没有独立可分离的效应——所以不能拿它当 A 级卖点。"
+    }
+  };
+
+  /* 训练域实测：溶氧 2.09 – 7.19 mg/L（85 站点） */
+  var DO_MIN = 2.09, DO_MAX = 7.19;
+
+  var cur = "do";
+  var els = {
+    bDo: document.getElementById("bDo"),
+    bFlow: document.getElementById("bFlow"),
+    bPlant: document.getElementById("bPlant"),
+    sDo: document.getElementById("sDo"),
+    sDoVal: document.getElementById("sDoVal"),
+    name: document.getElementById("rxName"),
+    sub: document.getElementById("rxSub"),
+    grade: document.getElementById("rxGrade"),
+    eff: document.getElementById("rxEff"),
+    p: document.getElementById("rxP"),
+    ci: document.getElementById("rxCi"),
+    par: document.getElementById("rxPar"),
+    age: document.getElementById("rxAge"),
+    cost: document.getElementById("rxCost"),
+    pay: document.getElementById("rxPay"),
+    verdict: document.getElementById("rxVerdict"),
+    normal: document.getElementById("rxNormal"),
+    refuse: document.getElementById("rxRefuse"),
+    refuseWhy: document.getElementById("refuseWhy")
+  };
+
+  function pick(key){
+    cur = key;
+    els.bDo.setAttribute("aria-pressed", String(key === "do"));
+    els.bFlow.setAttribute("aria-pressed", String(key === "flow"));
+    els.bPlant.setAttribute("aria-pressed", String(key === "plant"));
+    render();
+  }
+
+  function render(){
+    var m = MEASURES[cur];
+    els.name.textContent = m.name;
+    els.sub.textContent = m.sub;
+    els.grade.textContent = m.grade;
+    els.grade.className = "rx-g " + m.gradeCls;
+    els.eff.textContent = m.eff;
+    els.p.textContent = m.p;
+    els.ci.textContent = m.ci;
+    els.par.textContent = m.par;
+    els.age.textContent = m.age;
+    els.cost.textContent = m.cost;
+    els.pay.textContent = m.pay;
+    els.verdict.textContent = m.verdict;
+
+    // 只有「抬高溶氧」这一条可以被拖到训练域之外
+    var target = parseFloat(els.sDo.value);
+    els.sDoVal.textContent = target.toFixed(1);
+
+    if (cur === "do" && target > DO_MAX) {
+      els.normal.classList.add("off");
+      els.refuse.classList.add("on");
+      els.refuseWhy.innerHTML =
+        "你要求把溶氧抬到 <strong>" + target.toFixed(1) + " mg/L</strong>，" +
+        "但我们的 85 个站点里<strong>观测到的最高值只有 " + DO_MAX.toFixed(2) + " mg/L</strong>。" +
+        "这个情景落在训练域之外，模型没有证据——外推出来的数字会好看且不可信。" +
+        "<br><br>想继续？请先采集该区间的新观测，或把目标调回 " + DO_MAX.toFixed(2) + " mg/L 以内。";
+    } else {
+      els.normal.classList.remove("off");
+      els.refuse.classList.remove("on");
+    }
+  }
+
+  els.bDo.addEventListener("click", function(){ pick("do"); });
+  els.bFlow.addEventListener("click", function(){ pick("flow"); });
+  els.bPlant.addEventListener("click", function(){ pick("plant"); });
+  els.sDo.addEventListener("input", render);
+
+  render();
+})();
+</script>
+</body>
+</html>

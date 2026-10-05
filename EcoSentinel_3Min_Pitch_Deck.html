@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en" data-page-node-id="6q9dh8Y0azsZVQLJNLMAHg">
+<head data-page-node-id="ooipDNZrP6rJ30A63GzK0N">
+  <meta charset="UTF-8" data-page-node-id="TGLarQBxgRwDeV9jxjNP2u">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="SUL10niid85KRk9QdJL9iD">
+  <title>EcoSentinel | 3-Minute Hackathon Pitch Deck</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" data-page-node-id="yCoFWU9l3m9nXeankvXXkY">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin data-page-node-id="TuzJgH4AMdteKCXFTBdnM2">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" data-page-node-id="43TE1AmgVEMx3neOj6f62m">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: {
+              50: '#FDFBF7',
+              100: '#F7F3E8',
+              200: '#EFE9DA',
+              300: '#E2D9C5',
+              400: '#C8BC9F',
+              500: '#AD9F7F',
+              600: '#8C7E60',
+              700: '#6B5E43',
+              800: '#423828',
+              900: '#262016',
+            },
+            sage: {
+              50: '#F4F7F4',
+              100: '#E7EFE6',
+              200: '#D1E0D0',
+              300: '#B4CCA3',
+              400: '#8BAF78',
+              500: '#5F8D76',
+              600: '#4B735E',
+              700: '#3A6351',
+              800: '#2C4C3E',
+              900: '#1D3B2E',
+            },
+            river: {
+              50: '#F0F9F9',
+              100: '#E2F4F3',
+              200: '#BEE7E5',
+              300: '#8FD4D1',
+              400: '#63C7C4',
+              500: '#3A8E9B',
+              600: '#2B727D',
+              700: '#205B64',
+              800: '#17474E',
+              900: '#0E343A',
+            },
+            butter: {
+              100: '#FEF9E7',
+              200: '#FDF2C8',
+              300: '#FCE79C',
+              400: '#F4D77A',
+              500: '#E5C054',
+              600: '#C99E2E',
+            },
+            coral: {
+              50: '#FDF3F1',
+              100: '#FCE4E0',
+              200: '#F9C5BC',
+              300: '#F5A192',
+              400: '#F08A75',
+              500: '#E06A55',
+              600: '#C74A35',
+              700: '#A43725',
+              800: '#83281A',
+            }
+          },
+          fontFamily: {
+            serif: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            hand: ['Caveat', 'cursive'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Fixed 16:9 Viewport Stage Invariant */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #1A1713;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      user-select: none;
+    }
+
+    #viewport {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #stage {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      background-color: #F8F5EE;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(95, 141, 118, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(58, 142, 155, 0.05) 0%, transparent 40%);
+      transform-origin: center center;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 70px 90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(16px) scale(0.99);
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Subtle paper texture border */
+    .paper-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1.5px solid #E2D9C5;
+      box-shadow: 0 4px 20px -2px rgba(66, 56, 40, 0.06);
+    }
+
+    .pulse-glow {
+      animation: pulseGlow 2.5s infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(95, 141, 118, 0.4); }
+      50% { transform: scale(1.02); box-shadow: 0 0 25px 4px rgba(95, 141, 118, 0.2); }
+    }
+  </style>
+</head>
+<body data-page-node-id="IcRl7cBxg4PBzzVQPuF8LX">
+
+  <!-- VIEWPORT & FIXED 16:9 CANVAS -->
+  <div id="viewport" data-page-node-id="N3DRUzUJ5s8bO4Jzo6q880">
+    <div id="stage" data-page-node-id="AFXnxFqZpvdTWVKm7HgKkt">
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 1: THE CORE PARADOX (0:00 - 0:35) -->
+      <!-- ========================================================================= -->
+      <section class="slide active" id="slide-1" data-page-node-id="CQH6SmgCW7q50tgGV7Q9AQ">
+        <!-- Top header info -->
+        <div class="flex items-center justify-between border-b border-paper-300 pb-4" data-page-node-id="CueLqWdGMFPOCwcV09S5MX">
+          <div class="flex items-center gap-3" data-page-node-id="Dvt6mUOyuADW0kiTEj7gx1">
+            <span class="text-3xl" data-page-node-id="qNguknUpfTKJYNZ720F8oW">🌿</span>
+            <div data-page-node-id="SCKRvXXO2oyT488F88EjHU">
+              <span class="text-sm font-bold uppercase tracking-widest text-sage-700" data-page-node-id="2RbRiYsw0EwNSkTNjRBiBK">OneAquaHealth • IEEE Global Hackathon 2026</span>
+              <div class="text-sm font-serif font-bold text-paper-900" data-page-node-id="YdfzVZGz42B2nXsxlDzjPk">EcoSentinel</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2" data-page-node-id="QWEMuALyp7NtvFPlGYcYTu">
+            <span class="px-3 py-1 bg-sage-100 border border-sage-300 text-sage-900 text-sm font-mono font-bold rounded-full" data-page-node-id="dbwdrwMobhEfownMA3ah9y">Part 1: The Paradox</span>
+            
+          </div>
+        </div>
+
+        <!-- Slide Body -->
+        <div class="grid grid-cols-12 gap-12 items-center my-auto" data-page-node-id="8ZTDaxHwZHdCQLHaRNyYGY">
+          
+          <div class="col-span-7 space-y-6" data-page-node-id="mgZG1CA1PNI9k9vFcFvhO1">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-butter-300/60 border border-butter-500/50 text-paper-900 font-bold font-hand text-base" data-page-node-id="EmadHnhrwLASIvQw5kYT7a">
+              <span data-page-node-id="sD03bBEcLscYV7ygODoJro">💡</span>
+              <span data-page-node-id="hL3iJkb2XeybaC04avF4MJ">The Surprising Ecological Truth</span>
+            </div>
+            <h1 class="font-serif font-extrabold text-6xl text-sage-900 leading-[1.15]" data-page-node-id="esOB6uhVwRvaP8vMFIc37f">
+              Don't Wait for the Mosquito.<br data-page-node-id="1Uqo4l4eWCChPQh8HrGpnw">
+              <span class="text-river-500 italic" data-page-node-id="UxJSZjdb3pPRvrWZ7pSAzM">Read the River First.</span>
+            </h1>
+            <p class="text-lg text-paper-800 leading-relaxed max-w-2xl" data-page-node-id="bGPlbLQlgvmhvTSVzMfokv">
+              Cities spray millions of liters of chemical biocides to kill mosquitoes, yet West Nile Virus outbreaks keep rising. Why? <strong data-page-node-id="HnVIml0aFODTXddLezHyxJ">Because healthy flowing rivers don't breed mosquitoes.</strong>
+            </p>
+
+            <div class="p-5 rounded-2xl bg-white/90 border border-coral-400/40 shadow-sm space-y-2" data-page-node-id="Lq09rlXD1z8RyK7bBFvK2Z">
+              <div class="flex items-center gap-2 text-coral-600 font-bold text-sm" data-page-node-id="gluxy7Ev8HwQ5Cb8q7IzTC">
+                <span data-page-node-id="DRdO0UEDoAa7AK6F2m7AL2">⚠️</span>
+                <span data-page-node-id="At95k9S6IwtYfCG2xHG9VW">The "Urban Stream Syndrome" Paradox</span>
+              </div>
+              <p class="text-sm text-paper-800" data-page-node-id="GhO5wth2xOJK0Wn8nRbWPo">
+                Urban concrete and organic pollution create <strong data-page-node-id="sW37FU7hkomvtjIsOOgiuX">stagnant hypoxia (DO runs 2.1–7.2 mg/L across our 85 reaches; mean 4.8 mg/L)</strong>. This suffocates insect-eating fish and dragonflies, leaving the hyper-tolerant <em data-page-node-id="tLyXoMOUER6umCnX0CY4eL">Culex pipiens</em> vector free from all predators. <strong data-page-node-id="JaxY0AyaVk2jMhk9Q49ITg">Chemical fogging only kills the remaining fish—worsening the cycle.</strong>
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: Visual Diagram Card -->
+          <div class="col-span-5 space-y-4" data-page-node-id="wXiWxlC3iomNB6g99aCDfF">
+            <div class="paper-card p-7 rounded-3xl space-y-5 bg-gradient-to-br from-white via-paper-50 to-sage-50 border-2 border-sage-300" data-page-node-id="3tfSasa56mZPJrdIrSgCQw">
+              <h3 class="font-serif font-bold text-xl text-sage-900 flex items-center justify-between" data-page-node-id="XYHLZswdOAr8zBzmlGttHh">
+                <span data-page-node-id="mqD6HAR2cbKlcUuHPQau8q">The Causal Dilemma</span>
+                <span class="text-sm font-mono font-normal text-sage-700 bg-sage-100 px-2.5 py-1 rounded-full" data-page-node-id="dpmMrkZqPvayj5rmEiYoUF">One Health Paradox</span>
+              </h3>
+              
+              <div class="space-y-3" data-page-node-id="C67TII4HFeZ7dEnbjwBhmy">
+                <div class="p-3.5 rounded-xl bg-coral-50 border border-coral-200 flex items-start gap-3" data-page-node-id="h8j7Ay2wXsx68FdxXnOM2m">
+                  <span class="text-2xl" data-page-node-id="9EDxnaksZiyaEr2CGZvdEb">☠️</span>
+                  <div data-page-node-id="tBoiqXorACaNsWvR3GXAYz">
+                    <strong class="text-sm font-bold text-coral-800" data-page-node-id="UKcLGc9FS6aWLWtVqqKL5v">Flawed Practice: Chemical Fogging</strong>
+                    <p class="text-[14px] text-coral-700" data-page-node-id="pM8VON4g06c7EbJH0vwLEM">Destroys aquatic food webs • Triggers insecticide resistance • Pollutes municipal drinking water.</p>
+                  </div>
+                </div>
+
+                <div class="flex justify-center text-sage-400 font-bold text-xl" data-page-node-id="IHDpydPEjePC7RSBIHlL7n">↓</div>
+
+                <div class="p-3.5 rounded-xl bg-sage-50 border-2 border-sage-400 flex items-start gap-3 shadow-md" data-page-node-id="1yXI3Rh9P2Y5BSL0AeVdp6">
+                  <span class="text-2xl" data-page-node-id="OkMGEyvoDOwUMxKnIXBtdX">🌊</span>
+                  <div data-page-node-id="mJogFBVzpSipjMRwoYymMA">
+                    <strong class="text-sm font-bold text-sage-900" data-page-node-id="CvbXMajzogVOOWRYJvXXOm">Our Paradigm: Nature-Based Solutions (NbS)</strong>
+                    <p class="text-[14px] text-sage-700" data-page-node-id="BhTm3foGnQRFbEdbcXNMUd">Restore dissolved oxygen (scenario target &ge;6.5 mg/L) + baseflow (&ge;0.35 m/s) • Shear dislodges egg rafts • Predators return.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-paper-200 text-sm text-sage-800 font-hand text-center" data-page-node-id="QrYlKhVMNrYeMQBbFUKDGl">
+                "Healthy rivers are self-cleaning and vector-free."
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Bar -->
+        <div class="flex items-center justify-between text-sm text-paper-800 border-t border-paper-300 pt-3" data-page-node-id="owyZblibOCScKD6Zg0nCdf">
+          <span data-page-node-id="nLV5DTyTVvb721lk2PmKOC">EcoSentinel</span>
+          <span class="font-mono" data-page-node-id="yLqqwHQivIepuEeJUl3WYF">Slide 1 / 5</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 2: EMPIRICAL RIGOR & WORKLOAD (0:35 - 1:15) -->
+      <!-- ========================================================================= -->
+      <section class="slide" id="slide-2" data-page-node-id="KZ0HcZfNjae4j5AcoHg282">
+        <div class="flex items-center justify-between border-b border-paper-300 pb-4" data-page-node-id="ddZOiMBCT89AEYF81nTfas">
+          <div class="flex items-center gap-3" data-page-node-id="GdaVUUqzVMBrtGteb46acl">
+            <span class="text-3xl" data-page-node-id="lmEeosVlPPWW81Ru54ydAj">🔬</span>
+            <div data-page-node-id="JOAUOrNyxI0CLzzPo6IrZj">
+              <span class="text-sm font-bold uppercase tracking-widest text-sage-700" data-page-node-id="1y02IsNwW4W3dvnNdEJ2Eq">Scientific Foundation • Horizon Europe OneAquaHealth</span>
+              <div class="text-sm font-serif font-bold text-paper-900" data-page-node-id="xmSTGemBDC1KrlBMXWNNIL">5-Model LOCO Stacking & Causal Graph Pipeline</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2" data-page-node-id="l58XwPeounWm9dmt8QLMzf">
+            <span class="px-3 py-1 bg-sage-100 border border-sage-300 text-sage-900 text-sm font-mono font-bold rounded-full" data-page-node-id="S4vnspa5xAWAkA0YCdShkj">Part 2: Empirical Rigor</span>
+            
+          </div>
+        </div>
+
+        <div class="my-auto space-y-7" data-page-node-id="qgZTQKs1DHDOe76i7O2GCF">
+          <div class="flex items-end justify-between" data-page-node-id="S7wCay8JyXp0F8n2VyG0m4">
+            <div data-page-node-id="zvMXDCbrE9OVrwkPav2UkW">
+              <h2 class="font-serif font-extrabold text-5xl text-sage-900" data-page-node-id="WStf2dFrVYyOkQivMhxxY6">
+                85 Stations Across 5 Pilot Cities
+              </h2>
+              <p class="text-base text-paper-800 mt-1" data-page-node-id="RZcuIOQdtJrtIvZ43AXjc1">
+                Empirical Cross-Sections: Harmonized real field sensors across Antwerp, Athens, Coimbra, Milan, and Toulouse.
+              </p>
+            </div>
+            <div class="flex gap-4 text-right" data-page-node-id="XQtZVH9KpDqxNPrTQbYRPB">
+              <div class="paper-card px-4 py-2 rounded-xl border border-sage-300" data-page-node-id="3xVxHRzX0poTo6Cw5tq3wy">
+                <div class="font-serif font-extrabold text-2xl text-sage-900" data-page-node-id="UcorMAFf1QzuTbR4YYn2XD">49</div>
+                <div class="text-[14px] font-mono text-sage-700" data-page-node-id="tuYYNyxRY0YkjcdDhiynmD">Engineered Features</div>
+              </div>
+              <div class="paper-card px-4 py-2 rounded-xl border border-sage-300" data-page-node-id="GHb6I438J02Xn8AUEnRB0p">
+                <div class="font-serif font-extrabold text-2xl text-river-500" data-page-node-id="hFHbGZn4ybWLTPoBSDHjlg">0.951</div>
+                <div class="text-[14px] font-mono text-river-700" data-page-node-id="YiDiyz5f4LFUQglCAOMQKR">Best PR-AUC (CatBoost) &middot; Best R&sup2; 0.886 (Super Learner)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Pillars Grid -->
+          <div class="grid grid-cols-4 gap-5" data-page-node-id="IpU9Bpyjlq1Nes4rgxpGcL">
+            
+            <!-- Pillar 1: Feature Engineering -->
+            <div class="paper-card p-5 rounded-2xl border-t-4 border-t-sage-500 space-y-3" data-page-node-id="1vFoeFHW2Cx47wa7Nq2867">
+              <span class="text-sm font-mono font-bold text-sage-700 bg-sage-100 px-2 py-0.5 rounded" data-page-node-id="uDeZUb7VwX0O2D3357eqZW">Module 1 & 2</span>
+              <h4 class="font-serif font-bold text-base text-sage-900" data-page-node-id="Oob1A25hIHmaUncD3I9Pem">49-Dim Hydro-Meteorology</h4>
+              <p class="text-sm text-paper-800 leading-relaxed" data-page-node-id="qExNcm4nGEJ8N3M8oibs3w">
+                Ingested ERA5 reanalysis + water chemistry (DO, BOD₅, N:P, Turbidity) + Copernicus 500m imperviousness + 21-day GDD degree-days.
+              </p>
+              <div class="text-[14px] font-mono text-sage-600 bg-paper-50 p-2 rounded border border-paper-200" data-page-node-id="YiWcs2v0VhCe5DuGmyYRFh">
+                ✓ Weiss DO Saturation<br data-page-node-id="FocFffOnEx1ePFcwIESqvH">
+                ✓ Consecutive Dry Days
+              </div>
+            </div>
+
+            <!-- Pillar 2: Double Machine Learning -->
+            <div class="paper-card p-5 rounded-2xl border-t-4 border-t-river-500 space-y-3" data-page-node-id="0C2eQVLvIkclgigmmwQ8GY">
+              <span class="text-sm font-mono font-bold text-river-700 bg-river-100 px-2 py-0.5 rounded" data-page-node-id="ybSC8OZqqRSrDTS5gK8uby">Module 3 (Causal)</span>
+              <h4 class="font-serif font-bold text-base text-sage-900" data-page-node-id="GY0BECHAEs1O6QhdNPfAF7">Spatial Double ML</h4>
+              <p class="text-sm text-paper-800 leading-relaxed" data-page-node-id="JUo7aANlyuM0DLAUu5r3s6">
+                Untangled the causal effect of dissolved oxygen from <strong>10 pre-specified</strong> water, land-cover and weather confounders using Robinson's orthogonalization and city-clustered robust SEs.
+              </p>
+              <div class="text-[14px] font-mono text-river-700 bg-paper-50 p-2 rounded border border-paper-200" data-page-node-id="Ooo2FDNuTNmxhoWVSfNQcd">
+                &theta;_DO = -0.282 pp per +1 mg/L (p = 0.0023)<br data-page-node-id="XuDAp0Qmt7teNabTjMaQrO">
+                &theta;_Flow = -0.351 pp per +0.1 m/s (p = 0.36, n.s.) &middot; obs. diff -0.372 (p = 0.0029)
+              </div>
+            </div>
+
+            <!-- Pillar 3: River Topology GNN -->
+            <div class="paper-card p-5 rounded-2xl border-t-4 border-t-sage-700 space-y-3" data-page-node-id="1HzlpnKdZxZEkRnariXxDY">
+              <span class="text-sm font-mono font-bold text-sage-800 bg-sage-200 px-2 py-0.5 rounded" data-page-node-id="pLW5w2DFh1EmFL7JANLEdF">Module 5 (Network)</span>
+              <h4 class="font-serif font-bold text-base text-sage-900" data-page-node-id="7CtHS9H6ncqvAFig96zC0t">Stream-GAT Topology</h4>
+              <p class="text-sm text-paper-800 leading-relaxed" data-page-node-id="pD4CyJCA0OS0cXAAbna1UC">
+                PyTorch directed Graph Attention Network mapping upstream pollution propagation + an Uncertainty Gate that flags <strong>topologically ambiguous</strong> reaches for expert review instead of silently extrapolating (descriptive, not a calibrated cut-off).
+              </p>
+              <div class="text-[14px] font-mono text-sage-700 bg-paper-50 p-2 rounded border border-paper-200" data-page-node-id="fYNkCpG3SArWWjtt43hEG7">
+                ✓ Directed advection edges<br data-page-node-id="wvjQrhcz5I1BFsspTqJ5gH">
+                ✓ Strict spatial cross-val
+              </div>
+            </div>
+
+            <!-- Pillar 4: Briere ODE + WorldPop -->
+            <div class="paper-card p-5 rounded-2xl border-t-4 border-t-butter-500 space-y-3" data-page-node-id="rE87ScG0wnR7cmxwSGOXKl">
+              <span class="text-sm font-mono font-bold text-paper-900 bg-butter-300 px-2 py-0.5 rounded" data-page-node-id="SaAEdj7UBSV5G72O2wpeWW">Phase 4 (ODE) & Phase 5 (PAR)</span>
+              <h4 class="font-serif font-bold text-base text-sage-900" data-page-node-id="KFluRTIIamwpMiCEXxhZQC">Mechanistic ODE &amp; PAR</h4>
+              <p class="text-sm text-paper-800 leading-relaxed" data-page-node-id="7XVvLkyDo54BYUv9rOcLHx">
+                Integrated 4-stage Culex life-cycle ODEs (Egg-Larvae-Pupae-Adult) with Eurostat 500m elderly population grids for health economics.
+              </p>
+              <div class="text-[14px] font-mono text-paper-800 bg-paper-50 p-2 rounded border border-paper-200" data-page-node-id="hA2TDhpEoufHBGY6nEgoHR">
+                dL/dt = c_E&middot;E - (d_L(DO,BOD&#8325;) + c_L)&middot;L<br data-page-node-id="dbdakTNECbs9dzI7lZxt7G">
+                30-day emergence 372.3 &rarr; 308.7 (-17.07%)
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-paper-800 border-t border-paper-300 pt-3" data-page-node-id="Bgl6iFVCF1hVBe1KoRlLxt">
+          <span data-page-node-id="UV5qoxjpdmeMFoDBt42yk7">Validated with Strict Spatial Leave-One-City-Out (LOCO) to prevent data leakage</span>
+          <span class="font-mono" data-page-node-id="AbR9Grgkh1S7r2Z2SRyLTe">Slide 2 / 5</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 3: ONE HEALTH DECISION BRIDGE (1:15 - 1:40) -->
+      <!-- ========================================================================= -->
+      <section class="slide" id="slide-3" data-page-node-id="DkSdK1QoSGCIE19sn39YxY">
+        <div class="flex items-center justify-between border-b border-paper-300 pb-4" data-page-node-id="aJB1gKd28bX36MAGHGDNTq">
+          <div class="flex items-center gap-3" data-page-node-id="UqkCnD2tUceoqA9y0TzhF0">
+            <span class="text-3xl" data-page-node-id="kWYEo8Jomf9F22DgjUcNrj">🌱</span>
+            <div data-page-node-id="laDlm2KHWAPOUwr6anOdLI">
+              <span class="text-sm font-bold uppercase tracking-widest text-sage-700" data-page-node-id="lIFHlibSVmWJWSRj9c99BP">Popperian Hypothesis Testing &amp; Policy Translation</span>
+              <div class="text-sm font-serif font-bold text-paper-900" data-page-node-id="THMKByieOE4H9M95EJsMv3">Proven Counterfactual Impacts of Nature-Based Care</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2" data-page-node-id="J78NcIZ8Et7JfEzqPpLhg4">
+            <span class="px-3 py-1 bg-sage-100 border border-sage-300 text-sage-900 text-sm font-mono font-bold rounded-full" data-page-node-id="2HrlUNIGxUWIOx3uIH6X1N">Part 3: Decision Bridge</span>
+            
+          </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-10 items-center my-auto" data-page-node-id="qOoG5VBVpTRDn8tCeccoEK">
+          
+          <div class="col-span-7 space-y-6" data-page-node-id="Xfmu2fWqjersAPbdw2kLin">
+            <h2 class="font-serif font-extrabold text-5xl text-sage-900 leading-tight" data-page-node-id="4ay8LUv5tlSiPN5BrrZvmT">
+              Three Hypotheses.<br data-page-node-id="SGDB7RvwFCNoh4c4mHJr8U">
+              <span class="text-sage-600" data-page-node-id="jMWrBDibnn7ViGs8lcKptP">H1 Supported (p = 0.002); H2 Association Only (p = 0.003); H3 Not Demonstrated (p = 0.31, underpowered).</span>
+            </h2>
+            <p class="text-base text-paper-800 leading-relaxed" data-page-node-id="fDYWGEh5VJhkpu0OxfRmkn">
+              We subjected our core biological claims to rigorous pre-registered hypothesis tests in <code class="font-mono bg-paper-200 px-1.5 py-0.5 rounded text-sm text-sage-900" data-page-node-id="eWfRUULPEMUqZWcwdqIGVG">EcoSentinel_DipteraCAST_Enhanced.ipynb</code>:
+            </p>
+
+            <div class="space-y-3" data-page-node-id="iMhsSET0FONu5p5wDPNFbB">
+              <div class="paper-card p-4 rounded-xl border-l-4 border-l-sage-600 flex items-center justify-between" data-page-node-id="ePJJv3ZVhh0liMlmV5Tirr">
+                <div data-page-node-id="CrJiCGmqVlCEoetvqf4gM1">
+                  <strong class="text-sm text-sage-900 block" data-page-node-id="u4NLFjegdxxgge7rXNnbZh">H1: Hypoxia Predation-Release</strong>
+                  <span class="text-sm text-paper-800" data-page-node-id="lNLwIZpw0gmLWROADByGHa">Aeration restores predators; each +1 mg/L DO drops breeding risk</span>
+                </div>
+                <span class="font-serif font-extrabold text-xl text-sage-700" data-page-node-id="o0nI5H0weaTInT5bIF2mjd">-28.2%</span>
+              </div>
+
+              <div class="paper-card p-4 rounded-xl border-l-4 border-l-river-500 flex items-center justify-between" data-page-node-id="0jmeGyMU7V88YPyEM84JHm">
+                <div data-page-node-id="fljUECjUKQ3BnXXteDUaFP">
+                  <strong class="text-sm text-sage-900 block" data-page-node-id="EQ1jMH50KtjMt9oRT3R6zb">H2: Flow Velocity Association</strong>
+                  <span class="text-sm text-paper-800" data-page-node-id="VnCE92eRHfNhwNccUTZjlC">Stagnant vs flowing association (p = 0.003; 0.30 m/s threshold test null p = 0.84)</span>
+                </div>
+                <span class="font-serif font-extrabold text-xl text-river-600" data-page-node-id="MRZlpm6BYcBY1YzSGyRXWG">-37.2%</span>
+              </div>
+
+              <div class="paper-card p-4 rounded-xl border-l-4 border-l-butter-500 flex items-center justify-between" data-page-node-id="Pp0xLux5xuBq2jbYAVskuF">
+                <div data-page-node-id="BYXcEzK3Bp3rou7Ge574K0">
+                  <strong class="text-sm text-sage-900 block" data-page-node-id="Iv90osAo58ZssmAF7BWUrM">H3: River Topology Advantage</strong>
+                  <span class="text-sm text-paper-800" data-page-node-id="ibGZu1RKfz3P3dwIEDiV14">GAT beat MLP in 4 of 5 cities, but only by +0.003 to +0.025 PR-AUC, and lost Toulouse by &minus;0.376. At n = 5 the test can only reach p &lt; 0.05 on a 5/5 sweep &mdash; so: not demonstrated, <strong>not</strong> proof of absence.</span>
+                </div>
+                <div class="text-right shrink-0 pl-4" data-page-node-id="6npDRMIesHZV9KJa0Tydbb">
+                  <span class="font-serif font-extrabold text-xl text-paper-900 whitespace-nowrap" data-page-node-id="ovb8USj9IOiDNghxsvnRRx">p = 0.3125</span>
+                  <span class="text-[14px] text-coral-600 block font-bold whitespace-nowrap" data-page-node-id="VWonzbMybs0EE5mDBYvItm">Failed to reject H0</span>
+              <span class="text-[14px] text-paper-600 block font-semibold whitespace-nowrap">not proof of absence</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Health Economics Card -->
+          <div class="col-span-5 space-y-4" data-page-node-id="jGCmg5KMAZn9ReoZZlYid7">
+            <div class="paper-card p-8 rounded-3xl bg-gradient-to-br from-white to-river-50/50 border-2 border-river-300 space-y-5" data-page-node-id="J38GIC4YeB43kHfu8PBhOs">
+              <div class="flex items-center justify-between" data-page-node-id="rDIwfKiZVwaTnLQRqPpj0I">
+                <span class="text-sm font-mono font-bold uppercase text-river-800 bg-river-100 px-3 py-1 rounded-full" data-page-node-id="IgqrEzt2TG3i4AJCRwBLg4">Demographic PAR Impact &middot; Coimbra Reach (Mondego)</span>
+                <span class="text-sm text-paper-700" data-page-node-id="xNa4y32WtKqOo9JIOTBcvF">Eurostat 2021 Census Grounding</span>
+              </div>
+              
+              <h3 class="font-serif font-extrabold text-3xl text-sage-900" data-page-node-id="vfWQ00oTiaxATbjHmyysUd">
+                Protecting Real Human Lives
+              </h3>
+
+              <div class="grid grid-cols-2 gap-4" data-page-node-id="sD9QDUwwCPG6GZIomF98BG">
+                <div class="p-4 rounded-2xl bg-white border border-paper-200" data-page-node-id="JawE2bs0tJxc8SOfJUubuy">
+                  <div class="text-3xl font-serif font-black text-sage-900" data-page-node-id="MXaVeTgH78lNYlK2bz9xAN">7,913</div>
+                  <div class="text-sm text-sage-700 font-bold mt-1" data-page-node-id="Ir1VVGYSIZTKsD1dgZYWPw">Net Exposure Removed (&Delta;PAR units)</div>
+                  <div class="text-[14px] text-paper-600" data-page-node-id="3GrXeT1vekiIM8PLC4g97V">Baseline exposed: 16,882 PAR units (Mondego reach) &middot; overlapping 500&nbsp;m buffers, not a de-duplicated headcount</div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-white border border-paper-200" data-page-node-id="HT072FHsEWNx6tljZZGb5q">
+                  <div class="text-3xl font-serif font-black text-river-700" data-page-node-id="4R1qzbkynvBUHYW5eTpLYf">1,859</div>
+                  <div class="text-sm text-river-800 font-bold mt-1" data-page-node-id="sRx4loI0wNIKbkYzd2NbWP">Senior &Delta;PAR units (Age 65+, Mondego reach)</div>
+                  <div class="text-[14px] text-paper-600" data-page-node-id="NHt0SHNl1peBcBCU0kqsBf">Same relative reduction as all ages &mdash; not differential protection</div>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-sage-50 border border-sage-300 text-sm text-sage-900 flex items-center gap-3" data-page-node-id="ilRUyAz8EkfPkbjaHIbQ2r">
+                <span class="text-2xl" data-page-node-id="XnGpzEFKgow2LTkHjBKFXw">💶</span>
+                <div data-page-node-id="BKcqcvdkM7N3zgmJ9CvtGZ">
+                  <strong data-page-node-id="4ev2yIabVBiFBkIq9U3fwl">Health Economics Translation:</strong>
+                  <p class="text-[14px] text-sage-700 mt-0.5" data-page-node-id="aqxqaJuxV3WH2VkSwv6vQw">Avoids &euro;45,746/yr in acute medical costs in Coimbra (5.57-yr payback on a &euro;255,000 allocation). The basin-wide 1.8&ndash;2.3&nbsp;yr figure assumes the &euro;1,275,000 CapEx is split evenly across the 5 cities &mdash; per-city payback actually spans 1.4&ndash;5.6&nbsp;yrs.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-paper-800 border-t border-paper-300 pt-3" data-page-node-id="kgQHMYzxigl1P9gOtoHOs3">
+          <span data-page-node-id="wEo7F4O1g9xGSgFlQWtxjX">From Abstract Probabilities to Quantified Public Health Action</span>
+          <span class="font-mono" data-page-node-id="OOD5NJcy2RS2Qj8c9vP4IZ">Slide 3 / 5</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 4: THE LIVE DASHBOARD SHOWCASE (1:40 - 2:35) -->
+      <!-- ========================================================================= -->
+      <section class="slide" id="slide-4" data-page-node-id="YV4xPBWB8bmQvBgArq6Kjs">
+        <div class="flex items-center justify-between border-b border-paper-300 pb-4" data-page-node-id="mlnYtj6ghvpH9ZvKF4DU1u">
+          <div class="flex items-center gap-3" data-page-node-id="IJZ2XFvlez60eodG7jaLSh">
+            <span class="text-3xl" data-page-node-id="c2shB6KJ9ydT86HtRWfps8">💻</span>
+            <div data-page-node-id="jwFBAqS6dLmCtPDJHnWSeU">
+              <span class="text-sm font-bold uppercase tracking-widest text-sage-700" data-page-node-id="KSNjcvCDHFCi6CHQbj1Y9E">Interactive System Showcase • Live Demo Transition</span>
+              <div class="text-sm font-serif font-bold text-paper-900" data-page-node-id="SlYYnzoprrWkMPwyrOQBez">EcoSentinel: A Living River Nature Journal</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2" data-page-node-id="sKW58WO35D4DR0Ao8i1YOq">
+            <span class="px-3 py-1 bg-sage-100 border border-sage-300 text-sage-900 text-sm font-mono font-bold rounded-full" data-page-node-id="CWPGdUHSHlnOwn2JPbaW4O">Part 4: Live Demo</span>
+            
+          </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-10 items-center my-auto" data-page-node-id="XG2Psz0exEAekSVkGGFLAU">
+          
+          <div class="col-span-6 space-y-6" data-page-node-id="pnNFnG0pniVjPd91GJAuZS">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sage-100 border border-sage-300 text-sage-900 text-sm font-mono font-bold" data-page-node-id="cZ5GmuYZw6hNGSe9N2Luco">
+              <span data-page-node-id="KVDgzgjzrcsW6nQN5IJmAd">🌿</span>
+              <span data-page-node-id="hh0B2KMCiNS7Wx4ggNEgJv">"Friendly Outside, Rigorous Inside"</span>
+            </div>
+            
+            <h2 class="font-serif font-extrabold text-5xl text-sage-900 leading-tight" data-page-node-id="1tbQhRs2eQJ7MZY5nvnKjm">
+              An Interactive Journey<br data-page-node-id="3osC4kEqR8mvVvs5iZP38K">
+              <span class="text-river-500" data-page-node-id="vopF4o9G7qlmfZh1Iuj2aU">Into River Stewardship</span>
+            </h2>
+
+            <p class="text-base text-paper-800 leading-relaxed" data-page-node-id="DKHUoIfcf0vCBRcDgafI2b">
+              We replaced cold AI charts with a living editorial nature journal. Citizens and city managers can explore their river, slide NbS levers, and watch the ecosystem recover in real time.
+            </p>
+
+            <!-- Demo action step list -->
+            <div class="space-y-2.5 text-sm" data-page-node-id="vvqOoUY0x7Rlk1OOWqW0Xt">
+              <div class="p-3 rounded-xl bg-white border border-paper-200 flex items-center gap-3" data-page-node-id="QQcOl176M6tkDTzyZ27W94">
+                <span class="w-6 h-6 rounded-full bg-sage-200 font-bold flex items-center justify-center text-sage-800 font-mono" data-page-node-id="hh6UILTU7aBMqsCLSZPHWT">1</span>
+                <span data-page-node-id="eBehEZ8t1AV5uk6zGko2EW"><strong data-page-node-id="dlNk1WP7w60x8KrKi8D1U7">River Vitality Scoring:</strong> Read the live vitality score &mdash; 89 at full NbS deployment, &ldquo;Feeling Peaceful &amp; Living&rdquo;.</span>
+              </div>
+              <div class="p-3 rounded-xl bg-white border border-paper-200 flex items-center gap-3" data-page-node-id="FMYiWmW9xiu9hgRo9NjHTY">
+                <span class="w-6 h-6 rounded-full bg-river-200 font-bold flex items-center justify-center text-river-800 font-mono" data-page-node-id="dnnYIKe4fgKfVrryKR0Uvc">2</span>
+                <span data-page-node-id="cnOMc8WrYrNyQrM5wweRgi"><strong data-page-node-id="VbuaITEYvZCJDQb9HZCm8T">NbS Levers &amp; Live In-Situ Stage:</strong> Slide Aeration &amp; Flow — watch water clear, fish return, and ODE peak flatten.</span>
+              </div>
+              <div class="p-3 rounded-xl bg-white border border-paper-200 flex items-center gap-3" data-page-node-id="KFW5ITM8oWBzQRTw2xOwy1">
+                <span class="w-6 h-6 rounded-full bg-butter-300 font-bold flex items-center justify-center text-paper-900 font-mono" data-page-node-id="OivQvyvneK91Zzaeh2JGys">3</span>
+                <span data-page-node-id="6Z9ZpcKJuvStvD9fWHH9hB"><strong data-page-node-id="SwbKGPJDH2NxDntZeHIeU5">Alert Map &amp; Community Board:</strong> 85 real station coordinates on Esri World Topo + the citizen-observation board (demo data).</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Big Interactive Launch Card -->
+          <div class="col-span-6 flex flex-col items-center justify-center" data-page-node-id="wPGkQrxyNBUZbK0NpQbTPt">
+            <div class="paper-card p-8 rounded-3xl text-center space-y-6 border-2 border-sage-400 bg-gradient-to-b from-white via-paper-50 to-sage-50/60 shadow-xl w-full max-w-lg pulse-glow" data-page-node-id="knq6AZpjiAnNAG3gxEkfc7">
+              <span class="text-6xl block" data-page-node-id="DOZNqkFXco8Q2FBrLeJtKa">🌊</span>
+              
+              <div class="space-y-2" data-page-node-id="wibAcaA6OBYUqJ9hG7sxsq">
+                <h3 class="font-serif font-black text-3xl text-sage-900" data-page-node-id="W3Y7mZ2nCqSc78Pk8tNJC4">
+                  EcoSentinel Web Dashboard
+                </h3>
+                <p class="text-sm text-paper-700 leading-relaxed" data-page-node-id="MLTAsIAK2kx3wJNHwmBjpe">
+                  Single-file web application running directly in the browser, carrying embedded empirical LOCO predictions and Phase-5 PAR exposure outputs for all 85 stations.
+                </p>
+              </div>
+
+              <div class="pt-2" data-page-node-id="XdHAGlijH1qSSk4UFF4Nj9">
+                <a href="EcoSentinel_GNW_Horizon_Edition.html" target="_blank" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-sage-700 hover:bg-sage-900 text-white font-serif font-bold text-lg rounded-2xl shadow-lg transition-all transform hover:scale-105 active:scale-95 w-full" data-page-node-id="2dPCqaKkC78sj7Gu4EoW6t">
+                  <span data-page-node-id="I3jeWwGitQYXu8U3iimYxR">🌿 Launch Live Dashboard</span>
+                  <i data-lucide="external-link" class="w-5 h-5" data-page-node-id="8fMonMLG88Ip579A310SkH"></i>
+                </a>
+                <span class="block text-[14px] font-mono text-sage-600 mt-2" data-page-node-id="DjJzHgB0nRCqZ3RyjTRtkX">Opens EcoSentinel_GNW_Horizon_Edition.html in new tab</span>
+              </div>
+
+              <div class="pt-3 border-t border-paper-200 flex justify-around text-sm text-sage-800" data-page-node-id="K4xGZASwQraliZwtW4jYL4">
+                <span class="flex items-center gap-1" data-page-node-id="k5SxbiKG18axN5HEDnazj2"><span data-page-node-id="DmC0cQ2wkGLYwUStFdfmNU">✨</span> 100% Free Esri Topo</span>
+                <span class="flex items-center gap-1" data-page-node-id="XW819M7p5vajp6rAXC0bMG"><span data-page-node-id="qTgDYacT4DRyUbdFzlJ44t">🐟</span> Precomputed Scenario Surrogates</span>
+                <span class="flex items-center gap-1" data-page-node-id="GkrylzKo40EBAT2XK02RXD"><span data-page-node-id="scdF7iaJqYCGFEJnON28rZ">🗺️</span> 85 Real Stations</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-paper-800 border-t border-paper-300 pt-3" data-page-node-id="XALtv3yd8T9vdz4OymhckO">
+          <span data-page-node-id="8k3SYZ9K3WLD4O5ajRb8Ho">Click the green button above to transition seamlessly to the live demo</span>
+          <span class="font-mono" data-page-node-id="zKxdcERrTGGqxds6sJU51r">Slide 4 / 5</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 5: ONE HEALTH VISION & IMPACT (2:30 - 3:00) -->
+      <!-- ========================================================================= -->
+      <section class="slide" id="slide-5" data-page-node-id="T9195AXSoJCU9WEH4x7MD2">
+        <div class="flex items-center justify-between border-b border-paper-300 pb-4" data-page-node-id="jogo6ZJa8PfVzkM9st0gt5">
+          <div class="flex items-center gap-3" data-page-node-id="Q93Kk0ULHMwyOXDHmrzzDq">
+            <span class="text-3xl" data-page-node-id="MdlklFVmbM18NgMpb9LGAz">🌍</span>
+            <div data-page-node-id="vfbZD1jtCPxqEWasazZJG2">
+              <span class="text-sm font-bold uppercase tracking-widest text-sage-700" data-page-node-id="I9Ffvzr5c64V2aUXF9GCkj">Closing Synthesis • Horizon Europe OneAquaHealth</span>
+              <div class="text-sm font-serif font-bold text-paper-900" data-page-node-id="CXLqp2Ovc5ou5dx1Prcijf">A Paradigm Shift for Urban Water Stewardship</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2" data-page-node-id="7aZZP8CHZE4A4g3INO2DdK">
+            <span class="px-3 py-1 bg-sage-100 border border-sage-300 text-sage-900 text-sm font-mono font-bold rounded-full" data-page-node-id="ItgtNZE4HxXE4FjYjuOo9U">Part 5: Vision &amp; Close</span>
+            
+          </div>
+        </div>
+
+        <div class="my-auto space-y-8 text-center max-w-4xl mx-auto" data-page-node-id="f4aVHFeFI4D27qNhBFVk69">
+          
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sage-100 border border-sage-300 text-sage-900 text-sm font-mono font-bold" data-page-node-id="AnwAQILPAqfX6augf4BWio">
+            <span data-page-node-id="8kIzxpEwB1q37n4ufAmWql">✨</span>
+            <span data-page-node-id="XPhKqZoO76ZWNK90yWNKdK">The One Health Triad: River • Vector • Community</span>
+          </div>
+
+          <h1 class="font-serif font-extrabold text-6xl text-sage-900 leading-tight" data-page-node-id="sKlN5Kr6HZiEvCgUhfl6U2">
+            "Healthy Rivers Don't Breed Mosquitoes.<br data-page-node-id="4fWu4yxmv4jhL4GExGdvmk">
+            <span class="text-river-500 italic" data-page-node-id="7lyrn7xJxOG5l6214THALg">Stewardship is the Best Medicine."</span>
+          </h1>
+
+          <p class="text-lg text-paper-800 leading-relaxed max-w-2xl mx-auto" data-page-node-id="4pWlrLe5a06NCt6nD3db2l">
+            EcoSentinel proves that advanced causal machine learning and nature-based solutions don't have to stay locked in academic journals. By turning complex topological models into a living nature journal, we empower cities and citizens to heal their waterways before outbreaks begin.
+          </p>
+
+          <!-- 3 Impact Pillars -->
+          <div class="grid grid-cols-3 gap-6 text-left" data-page-node-id="2vD5CMG20zgOwqaA7x71Q3">
+            <div class="paper-card p-5 rounded-2xl border-t-4 border-t-sage-600 space-y-2" data-page-node-id="xkwV5Zm1Nld1lYWQf3tegb">
+              <span class="text-2xl" data-page-node-id="rkZWmsyEPC4TEDghGxlkEX">🏛️</span>
+              <h4 class="font-serif font-bold text-base text-sage-900" data-page-node-id="EBvFCZEhEJBGHWXe4YuDI3">For Municipalities</h4>
+              <p class="text-sm text-paper-700" data-page-node-id="rDXR0kr3VVM4mnbHMbE7eI">Stop blindly spraying biocides. Deploy micro-weirs and baseflow flushing where the causal DO model points to the highest risk-reduction return.</p>
+            </div>
+            <div class="paper-card p-5 rounded-2xl border-t-4 border-t-river-500 space-y-2" data-page-node-id="iKlqL8v8xG5lTfAGCeRltA">
+              <span class="text-2xl" data-page-node-id="KlbZm0yi8xpHrw6D4vmsRw">👥</span>
+              <h4 class="font-serif font-bold text-base text-sage-900" data-page-node-id="6rORGGj1ID9btlUeqBZFQH">For Communities</h4>
+              <p class="text-sm text-paper-700" data-page-node-id="u7N01zX3prWJA9Lhiihj4d">&ldquo;Whispers from the River&rdquo; &mdash; the community observation board &mdash; turns passive residents into long-term environmental stewards.</p>
+            </div>
+            <div class="paper-card p-5 rounded-2xl border-t-4 border-t-butter-500 space-y-2" data-page-node-id="R0QzzBzESvcbztDm431EIX">
+              <span class="text-2xl" data-page-node-id="usR7jT4IxvT7V7EbnO829X">🇪🇺</span>
+              <h4 class="font-serif font-bold text-base text-sage-900" data-page-node-id="zcoKnbXN0j22ubHIY72CVc">For EU One Health</h4>
+              <p class="text-sm text-paper-700" data-page-node-id="VSdblKNoCa13HasiSD5CSV">Directly serves EU Horizon Europe OneAquaHealth goals with reproducible LOCO benchmarks across all 5 pilot cities.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex items-center justify-between text-sm text-paper-800 border-t border-paper-300 pt-3" data-page-node-id="r2Bf8xOv5RCv9o3X7Hp9Yt">
+          <span class="font-serif italic font-bold" data-page-node-id="GWBLp6FRNNmKDz8WJB0tqZ">Thank you! Questions &amp; Live Inspection Welcome.</span>
+          <span class="font-mono" data-page-node-id="RuXGHQvTW42vjEgntOnTCj">Slide 5 / 5</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- GLOBAL OVERLAYS: TIMER & CONTROLS -->
+      <!-- ========================================================================= -->
+      
+      <!-- Top Right Floating Deck Controls -->
+      <div class="absolute top-5 right-6 z-50 flex items-center gap-2.5 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-2xl border border-paper-300 shadow-md" data-page-node-id="pHikEkfK1X99h58vSu0dot">
+        <button onclick="toggleFullscreen()" class="p-1.5 hover:bg-paper-100 rounded-lg text-sage-800 transition-colors" title="Fullscreen [F]" data-page-node-id="L6ov0WW3G5AGR42f2PCFbJ">
+          <i data-lucide="maximize" class="w-4 h-4" data-page-node-id="JeBK88ZTk94kVNfXYujFxl"></i>
+        </button>
+      </div>
+
+      <!-- Bottom Floating Slide Navigation Bar -->
+      <div class="absolute bottom-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-full border border-paper-300 shadow-lg" data-page-node-id="7aKLVD2AidR23fdAXkIV3R">
+        <button onclick="prevSlide()" class="p-1.5 hover:bg-paper-100 rounded-full text-sage-900 transition-colors" title="Previous [←]" data-page-node-id="tw330AS8FVjnnNWMJjJiyJ">
+          <i data-lucide="chevron-left" class="w-5 h-5" data-page-node-id="no3DYuKxGWnbin5gv4Jvyn"></i>
+        </button>
+        
+        <div class="flex items-center gap-2 px-2" id="dotContainer" data-page-node-id="gF13xa5iqiaHFLZULLeLyj">
+          <button onclick="goToSlide(1)" class="w-3 h-3 rounded-full bg-sage-700 transition-all" data-page-node-id="DDhDxAUdjfPfuhDnguWTOv"></button>
+          <button onclick="goToSlide(2)" class="w-3 h-3 rounded-full bg-paper-300 transition-all" data-page-node-id="LZqEtAvNPoArGJsH11NzTJ"></button>
+          <button onclick="goToSlide(3)" class="w-3 h-3 rounded-full bg-paper-300 transition-all" data-page-node-id="Cb1XNnU73G3cC9HHH3RZiS"></button>
+          <button onclick="goToSlide(4)" class="w-3 h-3 rounded-full bg-paper-300 transition-all" data-page-node-id="zWZDbP9d5Pd8XCbIeceKpj"></button>
+          <button onclick="goToSlide(5)" class="w-3 h-3 rounded-full bg-paper-300 transition-all" data-page-node-id="5RdLBpsgl8EWcHmrWiCZqd"></button>
+        </div>
+
+        <button onclick="nextSlide()" class="p-1.5 hover:bg-paper-100 rounded-full text-sage-900 transition-colors" title="Next [→ / Space]" data-page-node-id="f2MAEfANDfjbzUObVcejrl">
+          <i data-lucide="chevron-right" class="w-5 h-5" data-page-node-id="tLmoUrVeL1GBBwJDmKWYOg"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 5;
+
+    // Speaker-notes script retained for reference only. The drawer UI and the [N]
+    // shortcut were removed from this deck; the same script ships in
+    // EcoSentinel_3Min_Video_Script.md
+    const SPEAKER_NOTES = {
+      1: {
+        title: "Part 1 — The Paradox (0:00 – 0:25)",
+        script: `
+          <p><strong>Say:</strong> “Every summer, a European riverbank suddenly swarms with mosquitoes — and the reflex is to spray. But a river can look calm and be suffocating underneath. When flow drops, oxygen collapses, predators die, and stagnant pools become mosquito incubators. So what if the mosquito isn't the problem? What if it's the river, telling us something?”</p>
+          <p><strong>Cue:</strong> Hold the title card <em>“Don't wait for the mosquito. Read the river first.”</em> for a full beat before advancing.</p>
+          <p><strong>Grounding:</strong> across our 85 reaches, dissolved oxygen runs 2.1–7.2 mg/L (mean 4.8). The polluted scenario used later sits at DO 2.0 / BOD₅ 8.0.</p>
+          <p><strong>Do not say</strong> that spraying is <em>proven</em> to increase mosquitoes — we have no such data. Say it “removes the predators that were doing the work for free.”</p>
+        `
+      },
+      2: {
+        title: "Part 2 — Empirical Rigor (0:25 – 1:05)",
+        script: `
+          <p><strong>Say:</strong> “EcoSentinel reads the river instead. We harmonised 85 monitoring stations across five European pilot cities — Antwerp, Athens, Coimbra, Milan, Toulouse — into 49 biophysical features, including hydrologic recession signals that most studies treat as static.</p>
+          <p>Then we separated correlation from causation. Double machine learning, controlling for <strong>ten</strong> pre-specified water, land-cover and weather confounders, shows each extra milligram per litre of dissolved oxygen causally lowers vector-risk probability by 28.2 percentage points — p equals 0.002. And five model families, validated with strict leave-one-city-out, all land within PR-AUC 0.93 to 0.95.”</p>
+          <p><strong>Must be exact:</strong> “<strong>ten</strong>” confounders. The source table lists exactly 10: imperviousness, tree cover, water temperature, pH, wetted width, mean depth, 7-day precipitation, 7-day growing degree-days, 7-day temperature SD, consecutive dry days. <em>(An earlier draft of this deck said 25 — that was wrong.)</em></p>
+          <p><strong>Do not say</strong> “the model is calibrated.” No Platt / isotonic / Hosmer–Lemeshow test was run, and 8 of 85 stations are hard-clipped at P = 1.0.</p>
+          <p><strong>Accuracy note:</strong> CatBoost leads <em>classification</em> (PR-AUC 0.951); the Super Learner leads <em>regression</em> (R² 0.886). Never blend the two into one “best model” claim.</p>
+        `
+      },
+      3: {
+        title: "Part 3 — Decision Bridge: Hypotheses & Health Economics (1:05 – 1:45)",
+        script: `
+          <p><strong>Say:</strong> “We then put our own claims under pre-registered falsification. H1, hypoxia release: supported. H2, a 0.30 m/s shear threshold: the association is real, the threshold is not — p equals 0.84. H3, that river topology improves cross-city transfer: it won four of five cities, lost Toulouse badly, and the paired test fails to reject the null. So we report a null — and the system refuses to issue a confident alert on ambiguous reaches.</p>
+          <p>Then we translate to human exposure. 288,152 residents live in the station buffers. Under restoration, risk-weighted exposure falls 47.7% — 97,790 PAR units.”</p>
+          <p><strong>This is the winning 20 seconds — slow down.</strong> The Toulouse null is the most credible thing in this submission. Most teams claim universal accuracy; we pre-registered a failure and built a refusal path around it.</p>
+          <p><strong>Do not say</strong> “97,791 people protected.” The 500 m buffers overlap, so ΔPAR is a risk-weighted exposure sum, not a de-duplicated headcount. And the 65+ cohort shows the <em>same relative reduction</em> as everyone else — the model has no age term.</p>
+          <p><strong>Coimbra card:</strong> the 7,913 ΔPAR units and €45,746/yr acute saving on this slide are the <em>Coimbra reach only</em> — that is the deepest-dive basin, not the basin total.</p>
+        `
+      },
+      4: {
+        title: "Part 4 — Live Dashboard Walkthrough (1:45 – 2:30)",
+        script: `
+          <p><strong>Screen:</strong> open <code>EcoSentinel_GNW_Horizon_Edition.html</code> in Chrome at 1920×1080, basin selector set to <em>All</em>, bookmarks bar hidden, zoom 100%.</p>
+          <p><strong>Do this first:</strong> drag the three cockpit levers down to zero so the polluted baseline is on screen, then narrate while dragging them back up. The dashboard loads at <em>full</em> NbS deployment — the before/after contrast only exists if you move the sliders.</p>
+          <p><strong>Say:</strong> “This is what a water authority actually opens. The map carries all 85 real stations, coloured by modelled transmission risk. Click any one for its oxygen, velocity, nitrate and 65-plus population — plus a recommended nature-based action. Down here is the cockpit: three levers — riparian planting, aeration, baseflow flushing. Watch. The cross-section clears, fish return, and the day-30 adult index falls from 123 to 99 — 17.07% less cumulative emergence, with no pesticide. The counter shows 97,790 PAR units of exposure removed and €553,614 a year in avoided acute care. And this panel tells you exactly what those numbers are not.”</p>
+          <p><strong>End on the caveat panel.</strong> Let it sit for a beat — it is a feature, not a confession.</p>
+          <p><strong>Do not point at the “−60.8% vector reduction” card.</strong> That is an illustrative index with no project table behind it; the audited figure is −17.07%. Also: the chart plots the <em>day-30 adult index</em> (123 → 99) while the 17.07% refers to <em>cumulative 30-day emergence</em> (372.3 → 308.7) — say which one you mean.</p>
+        `
+      },
+      5: {
+        title: "Part 5 — Vision & Close (2:30 – 3:00)",
+        script: `
+          <p><strong>Say:</strong> “EcoSentinel is a decision instrument, not a dashboard. It turns a degraded stream into an actionable, honest risk surface — causal where the evidence supports it, explicitly uncertain where it doesn't. Our data is one summer snapshot across five cities, so this is a planning estimate, not a forecast. The next step is sensor-in-the-loop validation and the OneAquaHealth citizen app.</p>
+          <p>Don't wait for the mosquito. Read the river first. Thank you.”</p>
+          <p><strong>Hold the closing card</strong> — IEEE OneAquaHealth Global Hackathon — until the video fades.</p>
+          <p><strong>Timing guard:</strong> if you are running long, cut the “What's next” sentence, never the Toulouse null.</p>
+        `
+      }
+    };
+
+    // Slide Navigation
+    function showSlide(index) {
+      if (index < 1 || index > totalSlides) return;
+      currentSlide = index;
+
+      // Update slide display
+      document.querySelectorAll('.slide').forEach((slide, i) => {
+        if (i + 1 === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      // Update slide indicator dots
+      const dots = document.querySelectorAll('#dotContainer button');
+      dots.forEach((dot, i) => {
+        if (i + 1 === currentSlide) {
+          dot.className = 'w-3 h-3 rounded-full bg-sage-700 transition-all';
+        } else {
+          dot.className = 'w-2 h-2 rounded-full bg-paper-400 hover:bg-paper-600 transition-all';
+        }
+      });
+
+      // Update notes drawer content
+      updateNotesContent();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    function goToSlide(n) {
+      showSlide(n);
+    }
+
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.warn("Fullscreen request error:", err);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Responsive Canvas Stage Scaling
+    function scaleStage() {
+      const stage = document.getElementById('stage');
+      if (!stage) return;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const baseWidth = 1920;
+      const baseHeight = 1080;
+
+      const scale = Math.min(windowWidth / baseWidth, windowHeight / baseHeight);
+      stage.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('resize', scaleStage);
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key.toLowerCase() === 'f') {
+        e.preventDefault();
+        toggleFullscreen();
+      }
+    });
+
+    // Retained but unreachable (no drawer element, no key binding).
+    function toggleSpeakerNotes() {
+      const drawer = document.getElementById('notesDrawer');
+      if (!drawer) return;
+      drawer.classList.toggle('hidden');
+      updateNotesContent();
+    }
+
+    function updateNotesContent() {
+      const notes = SPEAKER_NOTES[currentSlide] || SPEAKER_NOTES[1];
+      const container = document.getElementById('notesContent');
+      if (!container) return;
+      container.innerHTML = `
+        <div class="p-3 bg-sage-100 rounded-xl border border-sage-300 flex items-center justify-between text-sm">
+          <strong class="text-sage-900 text-sm">${notes.title}</strong>
+          <span class="text-[14px] font-mono font-bold text-sage-700 bg-white/80 px-2 py-0.5 rounded border border-sage-200">Pitch Script</span>
+        </div>
+        <div class="space-y-3">${notes.script}</div>
+      `;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // Init Lucide
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) lucide.createIcons();
+      scaleStage();
+      showSlide(1);
+    });
+  </script>
+</body>
+</html>
