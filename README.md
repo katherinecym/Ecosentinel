@@ -8,7 +8,7 @@
 ## 🚀 Live Demo & Quick Access
 
 - **🎬 3-Minute Demo Video**: [`EcoSentinel_3Min_Demo.mp4`](./EcoSentinel_3Min_Demo.mp4)
-- **📊 Interactive Streamlit App**: [Launch on Streamlit Cloud](https://share.streamlit.io/) *(Point to `app.py`)*
+- **📊 Interactive Streamlit App**: [https://ecosentinel.streamlit.app/](https://ecosentinel.streamlit.app/)
 - **🖥️ Full Web Presentation Deck**: [`EcoSentinel_3Min_Pitch_Deck.html`](./EcoSentinel_3Min_Pitch_Deck.html)
 - **📑 Scientific Experiment Notebook**: [`EcoSentinel_DipteraCAST_Enhanced.ipynb`](./EcoSentinel_DipteraCAST_Enhanced.ipynb)
 
