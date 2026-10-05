@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "infection_conversion": 0.015,
+    "wnf_rate": 0.2,
+    "wnnd_nonelder": 0.01,
+    "wnnd_elder": 0.04,
+    "dw_wnf": 0.051,
+    "duration_wnf_y": 0.08,
+    "dw_wnnd": 0.388,
+    "duration_wnnd_y": 1.0,
+    "cfr_nonelder": 0.08,
+    "cfr_elder": 0.18,
+    "yll_years": 12.5,
+    "cost_wnf": 350.0,
+    "cost_wnnd_icu": 18500.0,
+    "cost_rehab": 6200.0,
+    "nbs_capex_total": 1275000.0
+  },
+  "scope": "Scenario calculation from model-counterfactual, station-buffer-summed PAR; not observed clinical burden or de-duplicated residents.",
+  "annualization": "All rates/costs treated as a high-risk season annual scenario for payback arithmetic."
+}

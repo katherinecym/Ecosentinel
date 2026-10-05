@@ -1,0 +1,6 @@
+{
+  "scope": "Model-counterfactual Pareto sensitivity; not observed NbS before-after effects.",
+  "bio_score_model": "mean of five LOCO regression models",
+  "vector_input": "existing Phase5 model scenario probabilities",
+  "n": 85
+}

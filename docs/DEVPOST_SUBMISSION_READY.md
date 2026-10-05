@@ -122,10 +122,10 @@ Using vanilla CSS/JS and Leaflet with zero heavy runtime frameworks, we created 
 ## 6. Additional Info (For Judges & Hackathon Organizers)
 
 ### Repository & Artifact Architecture
-- **Interactive Flagship Dashboard**: `submission/EcoSentinel_GNW_Horizon_Edition.html` (Standalone, 100% offline-runnable, zero API keys required).
-- **Jupyter Verification Suite**: `submission/EcoSentinel_DipteraCAST_Enhanced.ipynb` (41 cells, 16 executed code cells with pre-rendered statistical outputs, zero errors).
-- **Pitch Deck**: `submission/EcoSentinel_3Min_Pitch_Deck.html` (Interactive slide presentation).
-- **Detailed Methodological Blueprint**: `submission/PROJECT_A_DEVPOST_AND_STORYBOARD_MASTER.md`.
+- **Interactive Flagship Dashboard**: `EcoSentinel_GNW_Horizon_Edition.html` (Standalone, 100% offline-runnable, zero API keys required).
+- **Jupyter Verification Suite**: `EcoSentinel_DipteraCAST_Enhanced.ipynb` (41 cells, 16 executed code cells with pre-rendered statistical outputs, zero errors).
+- **Pitch Deck**: `EcoSentinel_3Min_Pitch_Deck.html` (Interactive slide presentation).
+- **Detailed Methodological Blueprint**: `docs/PROJECT_A_DEVPOST_AND_STORYBOARD_MASTER.md`.
 
 ### Hardware & Environment Requirements
 - Any modern web browser (Chrome, Firefox, Safari, Edge).

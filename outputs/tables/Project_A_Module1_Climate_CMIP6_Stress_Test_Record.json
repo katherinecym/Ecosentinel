@@ -1,0 +1,38 @@
+{
+  "scope": "CMIP6-anchored additive temperature sensitivity; not downscaled GCM ensemble",
+  "temperature_input": "daily 2m air temperature used as water-temperature proxy",
+  "scenarios": {
+    "Baseline_observed_weather_proxy": {
+      "delta_c": 0.0,
+      "nbs": false,
+      "label": "Observed 2024\u20132026 air-temperature proxy"
+    },
+    "SSP2-4.5_2050_plus1.5C": {
+      "delta_c": 1.5,
+      "nbs": false,
+      "label": "Blueprint additive warming sensitivity"
+    },
+    "SSP3-7.0_2050_plus2.5C": {
+      "delta_c": 2.5,
+      "nbs": false,
+      "label": "Blueprint additive warming sensitivity"
+    },
+    "SSP5-8.5_2050_plus4.0C": {
+      "delta_c": 4.0,
+      "nbs": false,
+      "label": "Blueprint additive warming sensitivity"
+    },
+    "SSP5-8.5_plusNbS_net2.8C": {
+      "delta_c": 2.8,
+      "nbs": true,
+      "label": "Blueprint +4.0C with -1.2C NbS cooling offset"
+    }
+  },
+  "k_gen_dd": 245.0,
+  "briere": {
+    "c": 0.000375,
+    "tmin": 10.0,
+    "tmax": 35.0,
+    "threshold": 0.02
+  }
+}

@@ -1,0 +1,3 @@
+scenario,temp_water,dissolved_oxygen,bod5,initial_E,initial_L,initial_P,initial_A,day30_adult,day30_emergence_rate,cumulative_30d_emergence,units,relative_cumulative_emergence_reduction_pct_vs_polluted
+Polluted stagnant scenario,24.0,2.0,8.0,100.0,50.0,10.0,5.0,123.06587668468194,16.25592352791477,372.2548691735097,normalized population units per 100m² under parameterized scenarios,0.0
+Restored scenario,24.0,6.5,1.8,100.0,50.0,10.0,5.0,99.34162478827369,12.933969074610902,308.7251742985072,normalized population units per 100m² under parameterized scenarios,17.066182375546305

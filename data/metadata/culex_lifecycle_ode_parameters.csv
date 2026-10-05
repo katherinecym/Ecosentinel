@@ -1,0 +1,19 @@
+parameter,value,unit,source_or_reference,description
+c_E,0.00015,day^-1 °C^-2.5,Mordecai et al. (2019) PLoS Negl Trop Dis (DOI: 10.1371/journal.pntd.0007214),Briere egg development rate coefficient for Culex pipiens
+Tmin_E,8.0,°C,Mordecai et al. (2019) PLoS Negl Trop Dis,Minimum thermal developmental threshold for eggs
+Tmax_E,36.0,°C,Mordecai et al. (2019) PLoS Negl Trop Dis,Maximum thermal developmental threshold for eggs
+c_L,0.00010,day^-1 °C^-2.5,Mordecai et al. (2019) PLoS Negl Trop Dis,Briere larval development rate coefficient
+Tmin_L,10.0,°C,Mordecai et al. (2019) PLoS Negl Trop Dis,Minimum thermal developmental threshold for larvae
+Tmax_L,35.0,°C,Mordecai et al. (2019) PLoS Negl Trop Dis,Maximum thermal developmental threshold for larvae
+c_P,0.00025,day^-1 °C^-2.5,Mordecai et al. (2019) PLoS Negl Trop Dis,Briere pupal development rate coefficient
+Tmin_P,9.0,°C,Mordecai et al. (2019) PLoS Negl Trop Dis,Minimum thermal developmental threshold for pupae
+Tmax_P,37.0,°C,Mordecai et al. (2019) PLoS Negl Trop Dis,Maximum thermal developmental threshold for pupae
+oviposition_rate,50.0,eggs / 100m² / day,Ewing et al. (2016) Ecol Modell (DOI: 10.1016/j.ecolmodel.2016.08.008),Basal oviposition carrying input in urban stagnant reaches
+d_base_L,0.04,day^-1,Ewing et al. (2016) Ecol Modell,Intrinsic basal larval mortality rate in hypoxic water
+alpha_pred,0.18,day^-1,Ewing et al. (2016) Ecol Modell,Macroinvertebrate and fish predation pressure under normoxic DO
+K_DO,2.5,mg/L,Ewing et al. (2016) Ecol Modell,Half-saturation oxygen constant for aquatic predator recovery
+beta_org,0.02,day^-1,Ewing et al. (2016) Ecol Modell,BOD5 organic food subsidy lowering larval starvation
+K_BOD,4.0,mg/L,Ewing et al. (2016) Ecol Modell,Half-saturation organic load constant
+d_E,0.05,day^-1,Ciota et al. (2014) J Med Entomol (DOI: 10.1603/ME13187),Egg natural mortality rate
+d_P,0.08,day^-1,Ciota et al. (2014) J Med Entomol,Pupal emergence failure mortality rate
+d_A,0.12,day^-1,Mordecai et al. (2019) PLoS Negl Trop Dis,Adult daily mortality rate at standard summer temperature 24°C

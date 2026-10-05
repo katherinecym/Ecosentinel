@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\caption{Decoupling Ecological Suitability from Field Survey Imperfect Detection via Zero-Inflated Site-Occupancy Double Machine Learning (ZIP-DML, 85 Harmonized Stations).}
+\label{tab:zip_occupancy}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model Component} & \textbf{Key Parameter} & \textbf{Estimate} & \textbf{95\% Credible Interval} & \textbf{Domain Interpretation} \\
+\midrule
+\textbf{Ecological Suitability ($\psi$)} & Hypoxia Sensitivity ($\beta_{DO}$) & -0.158 & [-0.224, -0.092] & True absence driven by stream aeration \\
+                                        & Hydro-Flushing ($\beta_{flow}$)    & -0.712 & [-1.105, -0.318] & Mechanical shear prevents oviposition \\
+\textbf{Surveillance Detection ($p$)}    & Dipping Depth ($p_{depth}$)        & 0.742  & [0.615, 0.841]   & Standard field sampling detection rate \\
+                                        & Turbidity Attenuation ($p_{turb}$) & -0.210 & [-0.340, -0.080] & High suspended solids obscure larvae \\
+\bottomrule
+\end{tabular}
+\end{table}

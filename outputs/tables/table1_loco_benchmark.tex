@@ -1,0 +1,15 @@
+\begin{table*}[t]
+\centering
+\caption{Cross-City Zero-Shot Generalization Performance under Strict Leave-One-City-Out (LOCO) Spatial Validation (EU Horizon Europe OneAquaHealth Framework, 85 Harmonized Field Stations).}
+\label{tab:loco_benchmark}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Model Architecture} & \textbf{Vector PR-AUC $\uparrow$} & \textbf{F1-Score $\uparrow$} & \textbf{Brier Score $\downarrow$} & \textbf{Bio-Score $R^2 \uparrow$} & \textbf{RMSE $\downarrow$} & \textbf{MAE $\downarrow$} \\
+\midrule
+DipteraCAST Baseline (Official RF) & 0.952 & 0.841 & 0.122 & 0.862 & 4.937 & 3.921 \\
+Regularized Linear / ElasticNet    & 0.884 & 0.765 & 0.168 & 0.742 & 6.812 & 5.430 \\
+CatBoost Multi-Task (Proposed)     & \textbf{0.956} & \textbf{0.862} & \textbf{0.119} & 0.856 & 5.040 & 4.051 \\
+Heterogeneous Stacking (RF + CB)   & \textbf{0.961} & \textbf{0.868} & \textbf{0.115} & \textbf{0.871} & \textbf{4.810} & \textbf{3.805} \\
+\bottomrule
+\end{tabular}
+\end{table*}

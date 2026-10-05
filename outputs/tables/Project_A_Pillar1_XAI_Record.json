@@ -1,0 +1,9 @@
+{
+  "scope": "Fold-held-out CatBoost TreeSHAP/PDP; predictive attribution, not causal inference.",
+  "features": 44,
+  "folds": 5,
+  "reference_lines": {
+    "DO_mg_l": 4.5,
+    "flow_m_s": 0.3
+  }
+}

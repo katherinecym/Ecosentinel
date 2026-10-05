@@ -1,0 +1,7 @@
+{
+  "scope": "Exploratory n=5 chain-graph diagnostics; no braided-network mechanism is identifiable from supplied edges.",
+  "homophily_gain_pearson_r": -0.07697349403953913,
+  "homophily_gain_p": 0.9020911689850811,
+  "energy_gain_pearson_r": -0.26052100721116705,
+  "energy_gain_p": 0.6720857189827275
+}

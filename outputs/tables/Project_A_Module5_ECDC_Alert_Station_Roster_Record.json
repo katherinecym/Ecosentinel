@@ -1,0 +1,9 @@
+{
+  "scope": "Project operational alert roster; thresholds are not claimed as official ECDC threshold text.",
+  "counts": {
+    "Level_3_Orange": 37,
+    "Level_4_Red": 36,
+    "Level_2_Yellow": 8,
+    "Level_1_Green": 4
+  }
+}

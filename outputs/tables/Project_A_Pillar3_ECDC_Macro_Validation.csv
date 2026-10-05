@@ -1,0 +1,6 @@
+city,mean_p_vector_baseline,par_index_baseline,country,ecdc_2026_country_cases,poisson_fitted_cases,log_cases_plus1,micro_risk_rank,ecdc_case_rank,spearman_rho_exploratory,spearman_p_value_exploratory,poisson_coefficient_unadjusted,ecdc_scope
+Antwerp,0.4454529411764706,20176.6,Belgium,9,30.296738430786046,2.302585092994046,5.0,4.0,0.7999999999999999,0.10408803866182788,8.42150556162077,2026 country-level locally acquired cases; pilot-city mapping is ecological proxy
+Athens,0.7977764705882353,58812.4,Greece,355,588.8282979307608,5.87493073085203,1.0,2.0,0.7999999999999999,0.10408803866182788,8.42150556162077,2026 country-level locally acquired cases; pilot-city mapping is ecological proxy
+Coimbra,0.5539705882352941,16881.6,Portugal,0,75.55962142870298,0.0,4.0,5.0,0.7999999999999999,0.10408803866182788,8.42150556162077,2026 country-level locally acquired cases; pilot-city mapping is ecological proxy
+Milan,0.7076705882352942,68588.2,Italy,696,275.6983786694141,6.546785410760524,2.0,1.0,0.7999999999999999,0.10408803866182788,8.42150556162077,2026 country-level locally acquired cases; pilot-city mapping is ecological proxy
+Toulouse,0.664470588235294,40646.6,France,102,191.6169633738978,4.634728988229636,3.0,3.0,0.7999999999999999,0.10408803866182788,8.42150556162077,2026 country-level locally acquired cases; pilot-city mapping is ecological proxy
